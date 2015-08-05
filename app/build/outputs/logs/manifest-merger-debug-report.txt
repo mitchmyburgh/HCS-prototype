@@ -25,7 +25,7 @@ MERGED from com.android.support:support-v4:22.2.1:22:5
 		ADDED from AndroidManifest.xml:7:9
 	android:theme
 		ADDED from AndroidManifest.xml:9:9
-activity#com.hcs.prototype.hcs_prototype.MainActivity
+activity#com.hcs.prototype.hcs_prototype.LoginActivity
 ADDED from AndroidManifest.xml:10:9
 	android:label
 		ADDED from AndroidManifest.xml:12:13

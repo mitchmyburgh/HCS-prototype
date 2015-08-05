@@ -1653,7 +1653,7 @@ containing a value of this type.
         public static final int abc_search_view=0x7f040016;
         public static final int abc_select_dialog_material=0x7f040017;
         public static final int abc_simple_dropdown_hint=0x7f040018;
-        public static final int activity_main=0x7f040019;
+        public static final int activity_login=0x7f040019;
         public static final int notification_media_action=0x7f04001a;
         public static final int notification_media_cancel_action=0x7f04001b;
         public static final int notification_template_big_media=0x7f04001c;
@@ -1668,7 +1668,7 @@ containing a value of this type.
         public static final int support_simple_spinner_dropdown_item=0x7f040025;
     }
     public static final class menu {
-        public static final int menu_main=0x7f0d0000;
+        public static final int menu_login=0x7f0d0000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
