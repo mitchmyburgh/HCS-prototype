@@ -39,7 +39,14 @@
       android:layout_alignParentRight="true"
       android:layout_alignParentEnd="true" />
       
-
+   <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/imageView"
+      android:src="@drawable/abc"
+      android:layout_below="@+id/textView"
+      android:layout_centerHorizontal="true" />
+      
    <EditText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -96,4 +103,3 @@
       android:layout_toEndOf="@+id/textview" />
 
 </RelativeLayout>
-<!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/layout/activity_login.xml -->
