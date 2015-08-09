@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+				>
+<TextView android:text="@string/app_name" android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/mainpage_textview"
+      android:textSize="35dp"
+	android:gravity="center"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true" />
+
+ <Button
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/action_login"
+      android:id="@+id/mainpage_button_login"
+      android:layout_centerHorizontal="true"
+android:onClick="goToLogin"
+ />
+      
+   <Button
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/action_register"
+      android:id="@+id/mainpage_button_register"
+	android:layout_centerHorizontal="true" 
+       />
+</LinearLayout>
