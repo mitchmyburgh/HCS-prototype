@@ -8,4 +8,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_add_cs">AddCSActivity</string>
 </resources>

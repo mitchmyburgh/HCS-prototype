@@ -43,6 +43,10 @@
             android:name=".AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name=".AddCSActivity"
+            android:label="@string/title_activity_add_cs" >
+        </activity>
     </application>
 
 </manifest>

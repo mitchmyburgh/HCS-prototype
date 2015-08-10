@@ -65,6 +65,10 @@
             android:name="com.hcs.prototype.hcs_prototype.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        <activity
+            android:name="com.hcs.prototype.hcs_prototype.AddCSActivity"
+            android:label="@string/title_activity_add_cs" >
+        </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
