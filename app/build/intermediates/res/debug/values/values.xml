@@ -389,9 +389,16 @@
     <eat-comment/>
     <string name="store_picture_message">"Allow Ad to store image in Picture gallery?"</string>
     <string name="store_picture_title">Save image</string>
+    <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="title_activity_about">AboutActivity</string>
     <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="title_activity_login">Sign in</string>
+    <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
     <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings_activity_register.xml -->
     <eat-comment/>
     <string name="title_activity_register">Register</string>
