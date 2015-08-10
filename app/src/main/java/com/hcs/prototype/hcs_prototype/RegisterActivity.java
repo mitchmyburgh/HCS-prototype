@@ -146,6 +146,9 @@ public class RegisterActivity extends ActionBarActivity implements LoaderCallbac
             //user.register();
             if (user.register()){
                 Intent intent = new Intent(this, MainActivity.class);
+                /*Bundle b = new Bundle();
+                b.putParcelable("USER", user);
+                intent.putExtras(b);*/
                 startActivity(intent);
             }
         }

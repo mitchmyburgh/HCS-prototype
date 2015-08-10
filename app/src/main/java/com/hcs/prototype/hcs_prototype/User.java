@@ -2,13 +2,15 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by mitch on 2015/08/10.
  * Class for logging in and registering users.
  * Connects to internal storage to validate the user.
  */
-public class User {
+public class User{
     public static final String PREFS_NAME = "UserDatabase";
     private String username;
     private String password;
@@ -75,4 +77,12 @@ public class User {
     public boolean isCurrentUser(){
         return currentUser;
     }
+    /*public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(1);
+    }
+    public int describeContents() {
+        return 0;
+    }*/
+
+
 }

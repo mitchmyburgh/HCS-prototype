@@ -3,15 +3,20 @@ package com.hcs.prototype.hcs_prototype;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*Bundle b = this.getIntent().getExtras();
+        if(b!=null)
+            user = b.getParcelable("USER");
+            Log.v("USER", user.getUsername());*/
     }
 
     @Override

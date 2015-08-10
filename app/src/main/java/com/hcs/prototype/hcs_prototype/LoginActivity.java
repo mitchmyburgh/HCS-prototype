@@ -160,6 +160,9 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             //Log.v("USER", user.login()+"");
             if (user.login()){
                 Intent intent = new Intent(this, MainActivity.class);
+                //Bundle b = new Bundle();
+                //b.putParcelable("USER", user);
+                //intent.putExtras(b);
                 startActivity(intent);
             }
 
