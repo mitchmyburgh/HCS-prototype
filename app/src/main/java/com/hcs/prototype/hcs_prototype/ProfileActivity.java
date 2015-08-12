@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -11,6 +12,8 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        TextView scoreDisplay = (TextView)findViewById(R.id.score_display);
+        scoreDisplay.setText(User.getUser().getUsername()+"\n"+User.getUser().getScore());
     }
 
     @Override
