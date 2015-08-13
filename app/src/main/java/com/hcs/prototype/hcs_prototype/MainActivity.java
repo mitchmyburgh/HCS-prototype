@@ -6,17 +6,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    User user;
+    CaseStudy cs = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*Bundle b = this.getIntent().getExtras();
-        if(b!=null)
-            user = b.getParcelable("USER");
-            Log.v("USER", user.getUsername());*/
+        CaseStudy.createDatabase(this);
+        TextView scoreDisplay = (TextView)findViewById(R.id.ls_display);
+        scoreDisplay.setText("");
+        for (int i = 0; i<100; i++){
+            if (CaseStudy.addCaseStudy("id"+i, "name", "type", "location") == -1){
+                //scoreDisplay.append("Duplicate case\n");
+            }
+        }
+
+
+        scoreDisplay.append(CaseStudy.getAllCaseString());
     }
 
     @Override

@@ -53,7 +53,13 @@ public class PreLoginActivity extends AppCompatActivity {
     */
     public void goToRegister(View view) {
 
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
+        User.createUser("test", "test", this);
+        if (User.getUser().register()) {
+            startActivity(intent);
+        } else if (User.getUser().login()){
+            startActivity(intent);
+        }
     }
 }
