@@ -1,7 +1,17 @@
 package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.os.Environment;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,6 +60,18 @@ public class CaseStudy {
     private static CaseStudyDatabase database = null;
 
     /**
+     * Default Contructor to create a new case study object using the primary key
+     */
+    public CaseStudy (){
+        this.PRIMARY_KEY = -1;
+        this.id = "-1";
+        this.name = "name";
+        this.description = "description";
+        this.location = "location";
+        this.type = "type";
+        //this.load();
+    }
+    /**
      * Create a new CaseStudy object
      * @param id the id for finding the case study on disk
      * @param context the context for accessing the database file
@@ -66,7 +88,6 @@ public class CaseStudy {
      * @param name the display name of the case study
      * @param type the type of the case study (local = loaded from inside apk, disk = loaded from teh internal storage of the device)
      * @param location the location on the disk of the case study
-     * @param context the context for accessing the database file
      */
     public CaseStudy (int pk, String id, String name, String description,  String location, String type){
         this.PRIMARY_KEY = pk;
@@ -75,6 +96,27 @@ public class CaseStudy {
         this.description = description;
         this.location = location;
         this.type = type;
+        //this.cacheJSON(); //Cache the JSON data
+        //this.context = context;
+        //this.save(); //save new case study to database
+    }
+    /**
+     * create a new CaseStudy object
+     * @param id the unique id for the case study
+     * @param name the display name of the case study
+     * @param type the type of the case study (local = loaded from inside apk, disk = loaded from teh internal storage of the device)
+     * @param location the location on the disk of the case study
+     * @param context trhe context for accesing files
+     */
+    public CaseStudy (int pk, String id, String name, String description,  String location, String type, Context context){
+        this.PRIMARY_KEY = pk;
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.type = type;
+        this.context = context;
+        this.cacheJSON(); //Cache the JSON data
         //this.context = context;
         //this.save(); //save new case study to database
     }
@@ -110,6 +152,14 @@ public class CaseStudy {
     }
 
     /**
+     * Get the type of the Case Study (local/disk)
+     * @return String this.type teh type of the case study
+     */
+    public String getType(){
+        return this.type;
+    }
+
+    /**
      * Save the Case study data to the database
      * @return boolean indicates whether the save was successful
      */
@@ -121,8 +171,13 @@ public class CaseStudy {
      * Load the case study data from the database
      * @return boolean indicates whether the load was succesful
      */
-    public boolean load(){
-        return true;
+    public static CaseStudy getCaseStudy(int pk, Context context){
+        database = new CaseStudyDatabase(context);
+        if (database == null){
+            return new CaseStudy();
+        } else {
+            return database.getCaseStudy(pk);
+        }
     }
     
     /**
@@ -185,6 +240,73 @@ public class CaseStudy {
      */
     @Override
     public String toString(){
-        return this.name+"\n"+this.description;
+        return this.id+", "+this.name+"\n"+this.description;
     }
+    /**
+     * Get the JSON data for the Case Study
+     * @return boolean indicates whether the case study data is loaded
+     */
+    private boolean cacheJSON(){
+        if (this.getType().equals("LOCAL")){
+            this.loadJSONFromAsset(this.getLocation());
+            return true;
+        } else if (this.getType().equals("DISK")){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Load The JSON File as a String
+     * @param fname The location of the assest
+     * @return String the string representation of the JSON file
+     */
+    public String loadJSONFromAsset(String fname) {
+        String json = null;
+        try {
+            final AssetManager assets = this.context.getAssets();
+            final String[] names = assets.list("");
+            for (int i = 0; i< names.length; i++){
+                Log.v("HELP", names[i]);
+            }
+            InputStream is = this.context.getAssets().open(fname);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Log.v("HELP", "HELP");
+            return null;
+        }
+        return json;
+    }
+
+    /**
+     * Load the JSON file as a String
+     * @param fname The filename
+     * @return String the JSON represented as as a string
+     */
+    public String loadJSONFromStorage(String fname){
+        File sdcard = Environment.getExternalStorageDirectory();
+        Log.v("EXTFILE", sdcard.getPath());
+        File file = new File(fname);
+        //file = new File(fname);
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+        }
+        catch (IOException e) {
+            Log.v("EXTFILE", "FAILURE IS AN OPTION");
+        }
+        return text.toString();
+    }
+
 }

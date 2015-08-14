@@ -178,6 +178,20 @@ ADDED from AndroidManifest.xml:46:9
 		ADDED from AndroidManifest.xml:48:13
 	android:name
 		ADDED from AndroidManifest.xml:47:13
+activity#com.hcs.prototype.hcs_prototype.CaseStudyActivity
+ADDED from AndroidManifest.xml:50:9
+	android:label
+		ADDED from AndroidManifest.xml:52:13
+	android:name
+		ADDED from AndroidManifest.xml:51:13
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:55:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
+	android:name
+		ADDED from AndroidManifest.xml:55:22
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.2.1:20:5
@@ -341,13 +355,6 @@ MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
 		ADDED from com.google.android.gms:play-services-base:7.5.0:22:13
 	android:value
 		ADDED from com.google.android.gms:play-services-base:7.5.0:23:13
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from com.google.android.gms:play-services-maps:7.5.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
-	android:name
-		ADDED from com.google.android.gms:play-services-maps:7.5.0:22:22
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from com.google.android.gms:play-services-maps:7.5.0:23:5
 MERGED from com.google.android.gms:play-services-maps:7.5.0:23:5

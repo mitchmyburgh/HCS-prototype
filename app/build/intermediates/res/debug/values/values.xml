@@ -393,6 +393,7 @@
     <eat-comment/>
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_add_cs">AddCSActivity</string>
+    <string name="title_activity_case_study">CaseStudyActivity</string>
     <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="title_activity_login">Sign in</string>

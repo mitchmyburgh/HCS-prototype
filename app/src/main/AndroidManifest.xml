@@ -47,6 +47,12 @@
             android:name=".AddCSActivity"
             android:label="@string/title_activity_add_cs" >
         </activity>
+        <activity
+            android:name=".CaseStudyActivity"
+            android:label="@string/title_activity_case_study" >
+        </activity>
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
 </manifest>

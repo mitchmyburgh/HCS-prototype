@@ -2,6 +2,7 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,11 +31,11 @@ public class MainActivity extends AppCompatActivity {
         CaseStudy.createDatabase(this);
         TextView scoreDisplay = (TextView)findViewById(R.id.ls_display);
         scoreDisplay.setText("");
-        for (int i = 0; i<100; i++){
+        /*for (int i = 0; i<100; i++){
             if (CaseStudy.addCaseStudy("id"+i, "name", "desc", "type", "location") == -1){
                 //scoreDisplay.append("Duplicate case\n");
             }
-        }
+        }*/
 
 
         //scoreDisplay.append(CaseStudy.getAllCaseString());
@@ -61,8 +62,15 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
-                //view.set
-                view.animate().setDuration(2000).alpha(0);
+                /*new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(position+"")
+                        .setMessage(csl.get(position).getId()).show();*/
+                Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("ID", csl.get(position).getPrimaryKey());
+                intent.putExtras(b);
+                startActivity(intent);
+                //view.animate().setDuration(2000).alpha(0);
 
             }
 

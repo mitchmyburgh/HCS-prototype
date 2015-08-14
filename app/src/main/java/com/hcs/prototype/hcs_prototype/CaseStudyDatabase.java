@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 15;
     /**
      * The name of the database 
      */
@@ -51,6 +51,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      * the type column header
      */
     private static final String KEY_TYPE = "type";
+    private static Context context = null;
     /**
      * The String for creating the table
      */
@@ -69,6 +70,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      */
     public CaseStudyDatabase (Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     /**
@@ -82,13 +84,35 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         db.execSQL(CASE_STUDY_TABLE_CREATE);
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(KEY_CASE_ID, "id");
+        values.put(KEY_CASE_ID, "id0");
         values.put(KEY_NAME, "name");
         values.put(KEY_DESC, "desc");
-        values.put(KEY_LOCATION, "location");
-        values.put(KEY_TYPE, "type");
+        values.put(KEY_LOCATION, "CaseStudy01.json");
+        values.put(KEY_TYPE, "LOCAL");
 
         long newRowId = db.insert(
+                CASE_STUDY_TABLE_NAME,
+                "null",
+                values);
+        values = new ContentValues();
+        values.put(KEY_CASE_ID, "id1");
+        values.put(KEY_NAME, "name");
+        values.put(KEY_DESC, "desc");
+        values.put(KEY_LOCATION, "CaseStudy02.json");
+        values.put(KEY_TYPE, "LOCAL");
+
+        db.insert(
+                CASE_STUDY_TABLE_NAME,
+                "null",
+                values);
+        values = new ContentValues();
+        values.put(KEY_CASE_ID, "id2");
+        values.put(KEY_NAME, "name");
+        values.put(KEY_DESC, "desc");
+        values.put(KEY_LOCATION, "/storage/emulated/0/CaseStudy01.json");
+        values.put(KEY_TYPE, "DISK");
+
+        db.insert(
                 CASE_STUDY_TABLE_NAME,
                 "null",
                 values);
@@ -123,8 +147,8 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         values.put(KEY_CASE_ID, "id");
         values.put(KEY_NAME, "name");
         values.put(KEY_DESC, "desc");
-        values.put(KEY_LOCATION, "location");
-        values.put(KEY_TYPE, "type");
+        values.put(KEY_LOCATION, "CaseStudy01.json");
+        values.put(KEY_TYPE, "LOCAL");
 
         long newRowId = db.insert(
                 CASE_STUDY_TABLE_NAME,
@@ -203,7 +227,25 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 csl.add(cs);
             } while (cursor.moveToNext());
         }
+        db.close();
         return csl;
+    }
+
+    /**
+     * Get the case study with a specific Primary Key
+     * @param pk the primary key of the case study in the database
+     * @return CaseStudy the Case study referenced in the database
+     */
+    public CaseStudy getCaseStudy(int pk){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + CASE_STUDY_TABLE_NAME+" WHERE "+KEY_ID+" = "+pk;
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            cs = new CaseStudy(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), this.context);
+        }
+        db.close();
+        return cs;
     }
 
 }

@@ -1,0 +1,41 @@
+{
+    "start": "A 56 year-old man presents to the emergency room at Presbyterian University Hospital with a chief complaint of \"I have a severe headache and fever\".",
+    "pastMedicalHistory": "1. Bursitis of Left shoulder for one year treated by hydrocortisone injections, once every three months by an outside physician prior to presentation.\n2. Orthotopic Liver Transplant in 1992 for cirrhosis secondary to alcohol use.\n3. Cadaveric Renal Transplant in 1994 for chronic renal failure secondary to glomerulonephritis.\n4. Hypertension.",
+    "pastMedicalTests": " lumbar puncture was performed showing 169.7 mg/dl of protein, 38 mg/dl of glucose, and 1,464 white cells/ mm3. The cerebrospinal spinal fluid differential was noted for 100 neutrophils but no bacteria. Cryptococcal Antigen testing performed on cerebrospinal fluid resulted in a titer of 1:256.",
+    "pastMedicalTreatment": "Started on multiple antibiotics and transferred to Presbyterian University Hospital for further medical management.",
+    "recentHistory": "The patient had been seen one week prior to presentation by his local physician with the complaints of headache and low grade fever. Two days prior to presentation at Presbyterian University Hospital he was seen in the emergency room at an outside hospital complaining of worsening of his headache and fever. ",
+    "physicalState": "Tired, middle aged, man in no apparent distress.",
+    "physicalShoulder": "His left shoulder was tender to palpation and movement.",
+    "testTemperature": "38.5",
+    "testBloodPressure": "normal",
+    "testHeartRate": "normal",
+    "testRespirationRate": "normal",
+    "testChestXRay": {
+        "desc": "Chest x-ray showed cardiac enlargement, no acute pulmonary abnormality, and a lytic lesion of the distal left clavicle.",
+        "img": "img/gross1.jpg"
+    },
+    "testShoulderXRay": {
+        "desc": "X-ray of left shoulder showed a pathologic fracture through a lytic lesion of the distal left clavicle most likely related to osteomyelitis.",
+        "img": "img/gross2.jpg"
+    },
+    "testShoulderCTScan": {
+        "desc": "CT scan of the shoulder (bone window, soft tissue window) showed probable abscess anterior and subjacent to the distal left clavicle with lytic destruction of the adjacent clavicle.",
+        "img": ["img/gross3.jpg", "img/gross4.jpg"]
+    },
+    "testHeadCTScan": "Chronic lacunar infarct to the right lentiform nucleus but no other abnormality",
+    "testCryptococcal": "Antibody titer 1:32",
+    "testTissueLeftClavicle": [{
+        "desc": "Culture at 35 degrees C on 5% sheep blood agar and Sabouraud's dextrose agar grew slightly convex mucoid colonies with smooth edges.",
+        "img": "img/micro1.jpg"
+    }, {
+    	"desc":"On cornmeal-Tween 80 agar round, dark walled, narrow neck budding yeast, without hyphae were identified. India ink stain of the colonies revealed encapsulated yeast with narrow based budding.",
+        "img": ["img/micro2.jpg", "img/micro3.jpg"]
+    }],
+    "testHistology": [{
+    	"desc": "The tissue submitted consisted of fibroadipose tissue, acute inflammatory exudate, necrotic bone, and granulomatous inflammation. Numerous encapsulated yeast forms were found lying within pools of mucus. The organisms have the classical \"poached egg\" appearance described for this organism. ",
+    	"img": "img/micro4.jpg"
+	},{
+		"desc": "Several narrow based budding yeast were identified and are highlighted by the mucicarmine stain.",
+		"img": ["img/micro5.jpg","img/micro5.jpg"]
+	}]
+}
