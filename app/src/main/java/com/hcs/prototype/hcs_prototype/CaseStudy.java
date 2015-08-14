@@ -2,6 +2,9 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * <h1>Case Study Class</h1>
  * The CaseStudy class implements case study related functions.
@@ -34,6 +37,10 @@ public class CaseStudy {
      */
     private String type = "local";
     /**
+     * The case study description
+     */
+    private String description;
+    /**
      * The context which is necessary for loading the database (acceptable to pass the current activity with this)
      */
     private Context context = null;
@@ -50,7 +57,7 @@ public class CaseStudy {
     public CaseStudy (String id, Context context){
         this.id = id;
         this.context = context;
-        this.load(); //load data from the database
+        //this.load(); //load data from the database
     }
 
     /**
@@ -61,13 +68,15 @@ public class CaseStudy {
      * @param location the location on the disk of the case study
      * @param context the context for accessing the database file
      */
-    public CaseStudy (String id, String name, String type, String location, Context context){
+    public CaseStudy (int pk, String id, String name, String description,  String location, String type){
+        this.PRIMARY_KEY = pk;
         this.id = id;
         this.name = name;
-        this.type = type;
+        this.description = description;
         this.location = location;
-        this.context = context;
-        this.save(); //save new case study to database
+        this.type = type;
+        //this.context = context;
+        //this.save(); //save new case study to database
     }
     /**
      * Returns the case study's key in the database
@@ -122,8 +131,8 @@ public class CaseStudy {
      * @return boolean indicates whether initialisation was successful
      */
     public static boolean createDatabase(Context context){
-        this.database = new CaseStudyDatabase(context);
-        if (this.database == null){
+        database = new CaseStudyDatabase(context);
+        if (database == null){
             return false;
         } else {
             return true;
@@ -138,11 +147,11 @@ public class CaseStudy {
      * @param location teh loacation of the casestudy.json on the disk
      * @return long indicates the row id (-1 indicates a failure)
      */
-    public static long addCaseStudy(String id, String name, String type, String location){
+    public static long addCaseStudy(String id, String name, String desc, String location, String type){
         if (database == null){
             return -1;
         } else {
-            return database.writeRow(id, name, type, location);
+            return database.writeRow(id, name, desc, location, type);
         }
     }
     
@@ -156,5 +165,26 @@ public class CaseStudy {
         } else {
             return database.getRowsString();
         }
+    }
+
+    /**
+     * Get a list containg all teh case studies in the database
+     * @return List<CaseStudy> containg all the case studies in the database
+     */
+    public static List<CaseStudy> getAllCaseStudy(){
+        if (database == null){
+            return new LinkedList<CaseStudy>();
+        } else {
+            return database.getAllCaseStudy();
+        }
+    }
+
+    /**
+     * Convert object to string representation
+     * @return String The string representation of the object
+     */
+    @Override
+    public String toString(){
+        return this.name+"\n"+this.description;
     }
 }

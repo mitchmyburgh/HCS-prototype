@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * <h1>Case Study Database Class<h1>
  * The CaseStudyDatabase class extends android.database.sqlite.SQLiteOpenHelper and provides methods for reading and writing to the case study table in the database
@@ -15,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 10;
     /**
      * The name of the database 
      */
@@ -37,6 +40,10 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      */
     private static final String KEY_NAME = "name";
     /**
+     * The Description column header
+     */
+    private static final String KEY_DESC = "description";
+    /**
      * The location column header
      */
     private static final String KEY_LOCATION = "location";
@@ -52,6 +59,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                     KEY_ID + " INTEGER PRIMARY KEY, " +
                     KEY_CASE_ID + " TEXT UNIQUE, " +
                     KEY_NAME + " TEXT, " +
+                    KEY_DESC + " TEXT, " +
                     KEY_LOCATION + " TEXT, " +
                     KEY_TYPE + " TEXT);";
 
@@ -62,6 +70,12 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     public CaseStudyDatabase (Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+    /**
+     * {@inheritDoc}
+     * Creates the database
+     * @param db the database to be created
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.v("DATABASE", "onCREATE");
@@ -70,6 +84,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, "id");
         values.put(KEY_NAME, "name");
+        values.put(KEY_DESC, "desc");
         values.put(KEY_LOCATION, "location");
         values.put(KEY_TYPE, "type");
 
@@ -79,14 +94,26 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 values);
         //this.db = db;
     }
+
+    /**
+     * {@inheritDoc}
+     * Upgrades the database
+     * @param db the database to be updated
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int n, int i){
         Log.v("DATABASE", "onUPGRADE");
-        Log.v("DATABASE",  CASE_STUDY_TABLE_CREATE);
+        Log.v("DATABASE", CASE_STUDY_TABLE_CREATE);
         Log.v("DATABASE", CASE_STUDY_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CASE_STUDY_TABLE_NAME);
         this.onCreate(db);
     }
+
+    /**
+     * {@inheritDoc}
+     * Opens the database
+     * @param db the database to be Opened
+     */
     @Override
     public void onOpen(SQLiteDatabase db) {
         //db.execSQL(CASE_STUDY_TABLE_CREATE);
@@ -95,6 +122,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, "id");
         values.put(KEY_NAME, "name");
+        values.put(KEY_DESC, "desc");
         values.put(KEY_LOCATION, "location");
         values.put(KEY_TYPE, "type");
 
@@ -103,13 +131,23 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 "null",
                 values);
     }
-    public long writeRow(String id, String name, String type, String location){
+
+    /**
+     * Writes a new case study to the databse
+     * @param id the case study id
+     * @param name the case study name
+     * @param type the case study type (local/disk)
+     * @param location the case study location
+     * @return long the new row id (-1 for failure)
+     */
+    public long writeRow(String id, String name, String desc, String location, String type){
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, id);
         values.put(KEY_NAME, name);
+        values.put(KEY_DESC, desc);
         values.put(KEY_LOCATION, location);
         values.put(KEY_TYPE, type);
 
@@ -117,27 +155,55 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 CASE_STUDY_TABLE_NAME,
                 "null",
                 values);
-        Log.v("database", newRowId+"");
+        Log.v("database", newRowId + "");
         db.close();
         return newRowId;
     }
+
+    /**
+     * Returns the database as a string
+     * @return String the database represented as a string
+     */
     public String getRowsString(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + CASE_STUDY_TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
-        String ls = "";
+        String ls = CASE_STUDY_TABLE_CREATE+"\n";
         if (cursor.moveToFirst()) {
             do {
                 ls += cursor.getInt(0)+" ";
                 ls += (cursor.getString(1))+" ";
                 ls += (cursor.getString(2))+" ";
                 ls += (cursor.getString(3))+" ";
-                ls += (cursor.getString(4))+"\n";
+                ls += (cursor.getString(4))+" ";
+                ls += (cursor.getString(5))+"\n";
 
             } while (cursor.moveToNext());
         }
         db.close();
         return ls;
+    }
+
+    /**
+     * Get All the Case Studies as a linked list of CaseStudy Objects
+     * @return List of CaseStudy objects
+     * @see CaseStudy
+     */
+    public List<CaseStudy> getAllCaseStudy(){
+        List<CaseStudy> csl = new LinkedList<CaseStudy>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + CASE_STUDY_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            do {
+                cs = new CaseStudy(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+
+                // Add case study to case study list
+                csl.add(cs);
+            } while (cursor.moveToNext());
+        }
+        return csl;
     }
 
 }
