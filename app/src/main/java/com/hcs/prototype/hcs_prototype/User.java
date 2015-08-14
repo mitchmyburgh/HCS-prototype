@@ -78,6 +78,7 @@ public class User{
      * @param password the password of the user
      * @param context the context for pref file access
      * @return user singleton
+     * @see User
      */
     public static User createUser(String username, String password, Context context){
         user = null; //reset user object
@@ -88,6 +89,7 @@ public class User{
     /**
      * get the current user object
      * @return User user singleton
+     * @see User
      */
     public static User getUser() {
         if (user == null){

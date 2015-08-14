@@ -36,8 +36,17 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      * The name column header 
      */
     private static final String KEY_NAME = "name";
+    /**
+     * The location column header
+     */
     private static final String KEY_LOCATION = "location";
+    /**
+     * the type column header
+     */
     private static final String KEY_TYPE = "type";
+    /**
+     * The String for creating the table
+     */
     private static final String CASE_STUDY_TABLE_CREATE =
             "CREATE TABLE " + CASE_STUDY_TABLE_NAME + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY, " +
