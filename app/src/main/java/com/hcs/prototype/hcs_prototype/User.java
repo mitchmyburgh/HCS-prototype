@@ -13,7 +13,7 @@ import android.os.Parcelable;
  * 
  * @author Mitch Myburgh
  * @version %I%, %G%
- * @since 0.1
+ * @since 0.1 //TODO: version numbers in github
  */
 public class User{
     //Instance variables
