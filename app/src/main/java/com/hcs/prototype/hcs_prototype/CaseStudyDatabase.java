@@ -8,14 +8,33 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Created by mitch on 2015/08/13.
+ * <h1>Case Study Database Class<h1>
+ * The CaseStudyDatabase class extends android.database.sqlite.SQLiteOpenHelper and provides methods for reading and writing to the case study table in the database
  */
 public class CaseStudyDatabase extends SQLiteOpenHelper {
+    /**
+     * Current version of the database, android uses this to indicate when to call onUpgrade
+     */
     private static final int DATABASE_VERSION = 7;
-    private static final String DATABASE_NAME = "CaseStudy";
+    /**
+     * The name of the database 
+     */
+    private static final String DATABASE_NAME = "HCS";
+    /**
+     * The name of the table containing the Case Studies in the Database.
+     */
     private static final String CASE_STUDY_TABLE_NAME = "caseStudy";
+    /**
+     * The id column header. 
+     */
     private static final String KEY_ID = "id";
+    /**
+     * The case id column header 
+     */
     private static final String KEY_CASE_ID = "case_id";
+    /**
+     * The name column header 
+     */
     private static final String KEY_NAME = "name";
     private static final String KEY_LOCATION = "location";
     private static final String KEY_TYPE = "type";
