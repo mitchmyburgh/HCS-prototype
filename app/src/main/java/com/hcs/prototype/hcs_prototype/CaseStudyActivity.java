@@ -17,11 +17,11 @@ public class CaseStudyActivity extends AppCompatActivity {
         //new AlertDialog.Builder(this).setTitle("title").setMessage(id+"").show();
         cs = CaseStudy.getCaseStudy(id, this);
         //new AlertDialog.Builder(this).setTitle("title").setMessage(cs.loadJSONFromAsset(cs.getLocation())).show();
-        TextView scoreDisplay = (TextView)findViewById(R.id.json_display);
+        TextView csDisplay = (TextView)findViewById(R.id.json_display);
         if (cs.getType().equals("LOCAL")) {
-            scoreDisplay.setText(cs.loadJSONFromAsset(cs.getLocation()));
+            csDisplay.setText(cs.getJSONName());
         } else {
-            scoreDisplay.setText(cs.loadJSONFromStorage(cs.getLocation()));
+            csDisplay.setText(cs.getJSONName());
         }
     }
 

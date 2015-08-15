@@ -5,6 +5,9 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,6 +61,10 @@ public class CaseStudy {
      * The databse reference for reading/writing data (static so can be accessed as a singleton from any activity) 
      */
     private static CaseStudyDatabase database = null;
+    /**
+     * JSON Object describing the case study
+     */
+    private JSONObject JSONobj = null;
 
     /**
      * Default Contructor to create a new case study object using the primary key
@@ -248,9 +255,18 @@ public class CaseStudy {
      */
     private boolean cacheJSON(){
         if (this.getType().equals("LOCAL")){
-            this.loadJSONFromAsset(this.getLocation());
+            try {
+                JSONobj = (new JSONObject(this.loadJSONFromAsset(this.getLocation()))).getJSONObject(this.id);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return true;
         } else if (this.getType().equals("DISK")){
+            try {
+                JSONobj = (new JSONObject(this.loadJSONFromStorage(this.getLocation()))).getJSONObject(this.id);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return true;
         } else {
             return false;
@@ -308,5 +324,19 @@ public class CaseStudy {
         }
         return text.toString();
     }
+
+    public String getJSONName(){
+      if (JSONobj != null){
+          try {
+              return JSONobj.getJSONObject("metadata").getString("name");
+          } catch (JSONException e) {
+              e.printStackTrace();
+              return "false";
+          }
+
+      } else {
+          return "false";
+      }
+    };
 
 }
