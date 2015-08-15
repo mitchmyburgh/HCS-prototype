@@ -457,4 +457,38 @@ public class CaseStudy {
         }
     }
 
+    /**
+     * get the possible diagnosis //TODO: randomly order diags
+     * @return String[] The list of diagnosis
+     */
+    public String[][] getDiags(){
+        String[][] diag = {{"false"}};
+        try {
+            //diag = new String[1];
+            diag = new String[1+JSONobj.getJSONObject("casestudy").getJSONObject("diagnosis").getJSONArray("possible").length()][1+JSONobj.getJSONObject("casestudy").getJSONObject("diagnosis").getJSONArray("possible").length()];
+            diag[0][0] = JSONobj.getJSONObject("casestudy").getJSONObject("diagnosis").getString("correct");
+            diag[1][0] = "0";
+            for (int i = 1; i<= JSONobj.getJSONObject("casestudy").getJSONObject("diagnosis").getJSONArray("possible").length(); i++){
+                diag[0][i] = JSONobj.getJSONObject("casestudy").getJSONObject("diagnosis").getJSONArray("possible").getString(i-1);
+                diag[1][i] = i+"";
+            }
+            return diag;
+        } catch (JSONException e){
+            return diag;
+        }
+    }
+
+    /**
+     * Check that the diagnosis is correct //TODO: Make this general for randomly ordered diags
+     * @param key the key to the diagnosis
+     * @return
+     */
+    public boolean checkDiag (String key){
+        if (key.equals("0")){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -331,6 +331,9 @@
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
     <string name="create_calendar_title">Create calendar event</string>
     <string name="decline">Decline</string>
+    <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="diagnose">Diagnose</string>
     <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="error_field_required">This field is required</string>

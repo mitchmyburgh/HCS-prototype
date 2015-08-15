@@ -10,4 +10,5 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_add_cs">AddCSActivity</string>
     <string name="title_activity_case_study">CaseStudyActivity</string>
+    <string name="diagnose">Diagnose</string>
 </resources>

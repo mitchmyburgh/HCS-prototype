@@ -9,9 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class CaseStudyActivity extends AppCompatActivity {
+public class CaseStudyActivity extends AppCompatActivity implements View.OnClickListener {
     CaseStudy cs;
     TextView csDescDisplay;
     TextView csDataDisplay;
@@ -40,6 +41,9 @@ public class CaseStudyActivity extends AppCompatActivity {
             //csDataDisplay.append(sa[0][i] + "\n");
             buts[i].setText(sa[1][i] + " " + sa[0][i]);
             buts[i].setTag(sa[1][i]);
+        }
+        for (int i = sa[0].length; i <4; i++){
+            buts[i].setVisibility(View.GONE);
         }
 
     }
@@ -85,6 +89,49 @@ public class CaseStudyActivity extends AppCompatActivity {
             //csDataDisplay.append(sa[0][i] + "\n");
             buts[i].setText(sa[1][i] + " " + sa[0][i]);
             buts[i].setTag(sa[1][i]);
+        }
+        for (int i = sa[0].length; i <4; i++){
+            buts[i].setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Diagnose the disease
+     * @param view the button clicked
+     */
+    public void diagnose(View view){
+        Button[] buts = new Button[5];
+        buts[0] = (Button)findViewById(R.id.question_button_1);
+        buts[1] = (Button)findViewById(R.id.question_button_2);
+        buts[2] = (Button)findViewById(R.id.question_button_3);
+        buts[3] = (Button)findViewById(R.id.question_button_4);
+        buts[4] = (Button)findViewById(R.id.diag_button);
+        for (int i = 0; i < buts.length; i++){
+            buts[i].setVisibility(View.GONE);
+        }
+        String[][] diags = cs.getDiags();
+        LinearLayout ll = (LinearLayout)findViewById(R.id.cs_view);
+        for (int i = 0; i< diags[0].length; i++){
+            Button myButton = new Button(this);
+            myButton.setText(diags[1][i]+" "+diags[0][i]);
+            myButton.setTag(diags[1][i]);
+            myButton.setOnClickListener(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            ll.addView(myButton, lp);
+        }
+
+    }
+    @Override
+    public void onClick(View v) {
+        if (cs.checkDiag((String)v.getTag())){
+            Button b = (Button)v;
+            new AlertDialog.Builder(this)
+                    .setTitle("WOOOOOO You got it right")
+                    .setMessage("The Person had" +b.getText()).show();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("You got it wrong")
+                    .setMessage("Go home and tell your mom you are an idiot").show();
         }
     }
 }
