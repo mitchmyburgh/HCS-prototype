@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * <h1>Case Study Class</h1>
@@ -65,7 +67,10 @@ public class CaseStudy {
      * JSON Object describing the case study
      */
     private JSONObject JSONobj = null;
-
+    /**
+     * History object - stores the progress on the case study
+     */
+    private History hist = null;
     /**
      * Default Contructor to create a new case study object using the primary key
      */
@@ -85,6 +90,7 @@ public class CaseStudy {
      */
     public CaseStudy (String id, Context context){
         this.id = id;
+        this.hist = new History();
         this.context = context;
         //this.load(); //load data from the database
     }
@@ -103,9 +109,7 @@ public class CaseStudy {
         this.description = description;
         this.location = location;
         this.type = type;
-        //this.cacheJSON(); //Cache the JSON data
-        //this.context = context;
-        //this.save(); //save new case study to database
+        this.hist = new History(pk, id);
     }
     /**
      * create a new CaseStudy object
@@ -123,6 +127,7 @@ public class CaseStudy {
         this.location = location;
         this.type = type;
         this.context = context;
+        this.hist = new History(pk, id);
         this.cacheJSON(); //Cache the JSON data
         //this.context = context;
         //this.save(); //save new case study to database
@@ -325,6 +330,10 @@ public class CaseStudy {
         return text.toString();
     }
 
+    /**
+     * Get the name of Case Study from the JSON file
+     * @return String the name of the Case study
+     */
     public String getJSONName(){
       if (JSONobj != null){
           try {
@@ -337,6 +346,115 @@ public class CaseStudy {
       } else {
           return "false";
       }
+    }
+    /**
+     * Get the description of Case Study from the JSON file
+     * @return String the description of the Case study
+     */
+    public String getJSONDesc(){
+        if (JSONobj != null){
+            try {
+                return JSONobj.getJSONObject("metadata").getString("description");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return "false";
+            }
+
+        } else {
+            return "false";
+        }
     };
+
+    /**
+     * Get the start string of Case Study from the JSON file
+     * @return String the start of the Case study
+     */
+    public String getStart(){
+        if (JSONobj != null){
+            try {
+                return JSONobj.getJSONObject("casestudy").getString("start");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return "false";
+            }
+
+        } else {
+            return "false";
+        }
+    };
+
+    /**
+     * Get 4 random questions to ask
+     * @return String[][] array of 4 questions and array of their keys
+     */
+    public String[][] getNextButtons(){
+        String[][] failure = {{"false"}};
+        String[][] success;
+        JSONObject used = new JSONObject();
+        Random randomGenerator = new Random();
+        if (JSONobj != null){
+            try {
+                JSONArray qs = JSONobj.getJSONObject("casestudy").getJSONArray("questions");
+                success = new String[2][Math.min(qs.length()-hist.length(), 4)];
+                int n = 0;
+                for (int i = 0; i < Math.min(qs.length()-hist.length(), 4); i++){
+                    int randomInt = randomGenerator.nextInt(qs.length()-hist.length());
+                    try{
+                        while (used.getBoolean(randomInt+"")){
+                            randomInt = randomGenerator.nextInt(qs.length()-hist.length());
+                        }
+                    } catch (JSONException e){
+                        used.put(randomInt+"", true);
+                    }
+                    for (int j = 0; j< qs.length(); j++){
+                        if (!hist.inHist(j+"")){
+                            if (randomInt == 0){
+                                Log.v("QUESTION", qs.getJSONObject(j).getString("question"));
+                                success[0][n] = qs.getJSONObject(j).getString("question");
+                                success[1][n] = j+"";
+                                n++;
+                                break;
+                            } else {
+                                randomInt--;
+                            }
+                        }
+                    }
+                }
+                return success;
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return failure;
+            }
+
+        } else {
+            return failure;
+        }
+    }
+
+    /**
+     * Get answer to a specific question
+     * @param key the key of the question
+     * @return String array contains the type of answer, the text answer and the string representation of the array of image links
+     */
+    public String[] getAnswer(String key){
+        hist.addStep(key);
+        String[] ans = new String[3];
+        try {
+            if (JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type").equals("text")){
+                ans[0] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type");
+                ans[1] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("answer");
+                return ans;
+            } else if (JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type").equals("img")) {
+                ans[0] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type");
+                ans[1] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONObject("answer").getString("desc");
+                ans[2] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONObject("answer").getJSONArray("img").toString();
+                return ans;
+            } else {
+                return ans;
+            }
+        } catch (JSONException e){
+            return ans;
+        }
+    }
 
 }
