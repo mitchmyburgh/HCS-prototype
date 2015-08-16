@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 18;
+    private static final int DATABASE_VERSION = 19;
     /**
      * The name of the database 
      */
@@ -84,7 +84,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         db.execSQL(CASE_STUDY_TABLE_CREATE);
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put(KEY_CASE_ID, "id0");
+        values.put(KEY_CASE_ID, "CASESTUDY1");
         values.put(KEY_NAME, "name");
         values.put(KEY_DESC, "desc");
         values.put(KEY_LOCATION, "CaseStudy01.json");
@@ -95,7 +95,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 "null",
                 values);
         values = new ContentValues();
-        values.put(KEY_CASE_ID, "id1");
+        values.put(KEY_CASE_ID, "CASESTUDY2");
         values.put(KEY_NAME, "name");
         values.put(KEY_DESC, "desc");
         values.put(KEY_LOCATION, "CaseStudy02.json");
@@ -118,10 +118,10 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 values);
 
         values = new ContentValues();
-        values.put(KEY_CASE_ID, "id2");
+        values.put(KEY_CASE_ID, "CASESTUDY4");
         values.put(KEY_NAME, "name");
         values.put(KEY_DESC, "desc");
-        values.put(KEY_LOCATION, "/storage/emulated/0/CaseStudy01.json");
+        values.put(KEY_LOCATION, "/storage/emulated/0/CaseStudy04.json");
         values.put(KEY_TYPE, "DISK");
 
         db.insert(

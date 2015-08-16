@@ -128,10 +128,11 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             new AlertDialog.Builder(this)
                     .setTitle("WOOOOOO You got it right")
                     .setMessage("The Person had" +b.getText()).show();
+            UserNormal.getUser().incScore(100);
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("You got it wrong")
-                    .setMessage("Go home and tell your mom you are an idiot").show();
+                    .setMessage("You Are Wrong").show();
         }
     }
 }
