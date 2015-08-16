@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 20;
     /**
      * The name of the database 
      */
@@ -154,18 +154,6 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     public void onOpen(SQLiteDatabase db) {
         //db.execSQL(CASE_STUDY_TABLE_CREATE);
         //this.db = db;
-        Log.v("DATABASE", "onOPEN");
-        ContentValues values = new ContentValues();
-        values.put(KEY_CASE_ID, "id");
-        values.put(KEY_NAME, "name");
-        values.put(KEY_DESC, "desc");
-        values.put(KEY_LOCATION, "CaseStudy01.json");
-        values.put(KEY_TYPE, "LOCAL");
-
-        long newRowId = db.insert(
-                CASE_STUDY_TABLE_NAME,
-                "null",
-                values);
     }
 
     /**

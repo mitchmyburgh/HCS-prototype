@@ -9,7 +9,7 @@ public class UserAdmin extends User {
     /**
      * Create a new user object
      */
-    private UserAdmin (){
+    UserAdmin (){
         super();
     }
     /**

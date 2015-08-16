@@ -20,9 +20,13 @@ This APK can thenn be installed on your device with the following command:
 ```
 adb -d install -r ./app/build/outputs/apk/app-debug.apk
 ```
-
+Unit tests can be run by entering:
+```
+./gradlew test
+```
+If the tests pass no output will be shown, else there will be a compiler error. For nicer test output please use Android studio.
 #Authors
 
-Mitch Myburgh
-Mbongeni Ncube
+Mitch Myburgh,
+Mbongeni Ncube,
 Aziza Makiwane

@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 public class AboutActivity extends AppCompatActivity {
     /**
-     * 
+     *
      * @param savedInstanceState
      */
     @Override

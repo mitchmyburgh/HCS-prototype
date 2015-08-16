@@ -9,7 +9,7 @@ public class UserNormal extends User {
     /**
      * Create a new user object
      */
-    private UserNormal (){
+    UserNormal (){
         super();
     }
     /**

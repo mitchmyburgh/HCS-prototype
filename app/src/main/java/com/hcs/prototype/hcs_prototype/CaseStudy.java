@@ -172,6 +172,12 @@ public class CaseStudy {
     }
 
     /**
+     * Get the case study description
+     * @return String the description
+     */
+    public String getDesc(){ return this.description; }
+
+    /**
      * Save the Case study data to the database
      * @return boolean indicates whether the save was successful
      */
