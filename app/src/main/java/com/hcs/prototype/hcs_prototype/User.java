@@ -2,7 +2,8 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * <h1>User Class Singleton</h1>
@@ -54,7 +55,7 @@ public class User{
     /**
      * Create a new user object
      */
-    private User (){
+    User (){
         this.username = "username";
         this.password = "password";
         this.context = null;
@@ -65,7 +66,7 @@ public class User{
     * @param password the user's password
     * @param context the context which the data will be obtained from
     */
-    private User(String username, String password, Context context){
+    User(String username, String password, Context context){
         this.username = username;
         this.password = password;
         this.context = context;
@@ -77,7 +78,7 @@ public class User{
      * @param password the password of the user
      * @param context the context for pref file access
      * @return user singleton
-     * @see User
+     *
      */
     public static User createUser(String username, String password, Context context){
         user = null; //reset user object

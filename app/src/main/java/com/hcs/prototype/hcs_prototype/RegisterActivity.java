@@ -142,9 +142,9 @@ public class RegisterActivity extends ActionBarActivity implements LoaderCallbac
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            User.createUser(email, password, this);
+            UserNormal.createUser(email, password, this);
             //user.register();
-            if (User.getUser().register()){
+            if (UserNormal.getUser().register()){
                 Intent intent = new Intent(this, MainActivity.class);
                 /*Bundle b = new Bundle();
                 b.putParcelable("USER", user);

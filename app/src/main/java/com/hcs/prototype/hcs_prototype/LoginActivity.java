@@ -156,9 +156,9 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 
-            User.createUser(email, password, this);
+            UserNormal.createUser(email, password, this);
             //Log.v("USER", user.login()+"");
-            if (User.getUser().login()){
+            if (UserNormal.getUser().login()){
                 Intent intent = new Intent(this, MainActivity.class);
                 //Bundle b = new Bundle();
                 //b.putParcelable("USER", user);
