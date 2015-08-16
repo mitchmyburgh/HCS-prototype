@@ -1,0 +1,33 @@
+2. Class Definitions
+
+There are 6 Class definitions in this project aside from the Activity definitions. These are:
+	1. CaseStudy
+		This class gives the user access to case studies. Static methods in this class allow the user to load case studies from teh database and instance methods allow teh user to interact with a specific case study.
+	2. CaseStudyDatabase
+		This class allows the user to interact with the database. It allows teh user to read and write from the database of case studies (this only contains metadata teh actual case studies are stored in .json files).
+	3. History
+		Stores the user's history for a specific walkthrough of a cse study.
+	4. User (super class)
+		Stores the data associated with the user such as login status and score.
+	5. UserAdmin (extends User)
+		Stores the data associated with the admin user such as login status and score. This class inherits from the User class.
+	6. UserNormal (extends User)
+		Stores the data associated with the normal user such as login status and score. This class inherits from the User class.
+To see more information about these and other classes see the javadoc documentation.
+
+3. Class Member Functions
+
+Each class has a variety of functions. See the javadoc documentation for a detailed breakdown of these functions.
+
+4. Class Inheritance
+
+There are 3 Classes that implement inheritance. These are:
+	1. CaseStudyDatabase (extends SQLiteOpenHelper)
+		This class inherits from android.database.sqlite.SQLiteOpenHelper in order to perform various actions on the database.
+	2. UserAdmin (extends User)
+		This class inherits from the User class to provide new methods specific to administrators (currently not in use)
+	3. UserNormal (extends User)
+		This class inherits from teh User class to provide new methods to the normal users (this is the default user logged in)
+
+
+
