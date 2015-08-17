@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -85,13 +86,16 @@ public class CaseStudy {
     }
     /**
      * Create a new CaseStudy object
-     * @param id the id for finding the case study on disk
+     * @param loc the location of the case study
      * @param context the context for accessing the database file
      */
-    public CaseStudy (String id, Context context){
-        this.id = id;
+    public CaseStudy (String loc, Context context){
+        this.location = loc;
         this.hist = new History();
         this.context = context;
+        this.type = "DISK";
+        this.cacheJSON();
+        CaseStudy.addCaseStudy(this.id, this.getJSONName(), this.getJSONDesc(), loc, this.type);
         //this.load(); //load data from the database
     }
 
@@ -267,14 +271,22 @@ public class CaseStudy {
     private boolean cacheJSON(){
         if (this.getType().equals("LOCAL")){
             try {
-                JSONobj = (new JSONObject(this.loadJSONFromAsset(this.getLocation()))).getJSONObject(this.id);
+                JSONobj = (new JSONObject(this.loadJSONFromAsset(this.getLocation())));
+                Iterator<String> iter = JSONobj.keys();
+                this.id = iter.next();
+
+                JSONobj = JSONobj.getJSONObject(this.id);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             return true;
         } else if (this.getType().equals("DISK")){
             try {
-                JSONobj = (new JSONObject(this.loadJSONFromStorage(this.getLocation()))).getJSONObject(this.id);
+                JSONobj = (new JSONObject(this.loadJSONFromStorage(this.getLocation())));
+                Iterator<String> iter = JSONobj.keys();
+                this.id = iter.next();
+
+                JSONobj = JSONobj.getJSONObject(this.id);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

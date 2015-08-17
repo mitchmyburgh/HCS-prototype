@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,8 +114,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_addcs) {
-            Intent intent = new Intent(this, AddCSActivity.class);
-            startActivity(intent);
+            //String m_chosen;
+            //Intent intent = new Intent(this, AddCSActivity.class);
+            //startActivity(intent);
+            //code taken from http://www.scorchworks.com/Blog/simple-file-dialog-for-android-applications/
+            SimpleFileDialog FileOpenDialog = new SimpleFileDialog(MainActivity.this, "FileOpen", new SimpleFileDialog.SimpleFileDialogListener() {
+                @Override
+                public void onChosenDir(String chosenDir) { // The code in this function will be executed when the dialog OK button is pushed
+                    String m_chosen = chosenDir;
+                    Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " + m_chosen, Toast.LENGTH_LONG).show();
+                    CaseStudy cs = new CaseStudy(m_chosen, MainActivity.this);
+                }
+            }); //You can change the default filename using the public variable "Default_File_Name"
+              FileOpenDialog.Default_File_Name = ""; FileOpenDialog.chooseFile_or_Dir(); ///////////////////////////////////////////////////////////////////////////////////////////////// - See more at: http://www.scorchworks.com/Blog/simple-file-dialog-for-android-applications/#sthash.RN6X6Tku.dpuf
             return true;
         }
         if (id == R.id.action_logout) {
