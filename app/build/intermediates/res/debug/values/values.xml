@@ -260,6 +260,9 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
+    <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="about_app">Health Case Studies Protoype App\nBy Mitch Myburgh, Mbongeni Ncube, Sindiswa Makiwane\nThe App allows the user to learn by doing Health Case studies\nThe app uses open code for the file loader taken from: http://www.scorchworks.com/Blog/simple-file-dialog-for-android-applications/ and www.codeproject.com/Articles/547636/Android-Ready-to-use-simple-directory-chooser-dial</string>
     <!-- From: file:/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="accept">Accept</string>
