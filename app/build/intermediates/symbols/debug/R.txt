@@ -566,6 +566,7 @@ int id action_bar_subtitle 0x7f0d003b
 int id action_bar_title 0x7f0d003a
 int id action_context_bar 0x7f0d0058
 int id action_divider 0x7f0d008e
+int id action_logout 0x7f0d009b
 int id action_menu_divider 0x7f0d0002
 int id action_menu_presenter 0x7f0d0003
 int id action_mode_bar 0x7f0d0054

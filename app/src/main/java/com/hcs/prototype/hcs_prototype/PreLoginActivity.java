@@ -17,6 +17,11 @@ public class PreLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prelogin);
 
+        if (User.getCurrentUser(this)){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     @Override

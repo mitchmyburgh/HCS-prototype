@@ -117,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        if (id == R.id.action_logout) {
+            if (User.getUser().logout()) {
+                Intent intent = new Intent(this, PreLoginActivity.class);
+                startActivity(intent);
+            }
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

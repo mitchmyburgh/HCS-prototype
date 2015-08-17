@@ -104,11 +104,14 @@ public class User{
     public boolean login() {
         if (context != null) {
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor usersEdit = users.edit();
             if (users.getString(username, "no_name").equals("no_name")) {
                 currentUser = false;
                 return currentUser;
             } else if (users.getString(username, "no_name").equals(password)) {
                 currentUser = true;
+                usersEdit.putString("current_user", username);
+                usersEdit.commit();
                 return currentUser;
             } else {
                 currentUser = false;
@@ -128,6 +131,7 @@ public class User{
             SharedPreferences.Editor usersEdit = users.edit();
             if (users.getString(username, "no_name") == "no_name") {
                 usersEdit.putString(username, password);
+                usersEdit.putString("current_user", username);
                 usersEdit.commit();
                 currentUser = true;
                 return currentUser;
@@ -180,5 +184,41 @@ public class User{
     public int incScore(int score){
         this.score += score;
         return this.score;
+    }
+
+    /**
+     * Get the currently logged in user (for reopening the app at later time)
+     * @param context The context for accessing the preferences file
+     * @return boolean whether there is a currently logged in user
+     */
+    public static boolean getCurrentUser(Context context){
+        if (context != null) {
+            SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
+            if (users.getString("current_user", "no_name").equals("no_name")) {
+                return false;
+            } else  {
+                User.createUser(users.getString("current_user", "no_name"), users.getString(users.getString("current_user", "no_name"), "no_pass"), context);
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Logout the user
+     * @return boolean if the user is logged out
+     */
+    public boolean logout(){
+        if (this.context != null){
+            SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor usersEdit = users.edit();
+            usersEdit.putString("current_user", "no_name");
+            usersEdit.commit();
+            user = null;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
