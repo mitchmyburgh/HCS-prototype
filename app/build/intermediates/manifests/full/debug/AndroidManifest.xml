@@ -73,6 +73,10 @@
             android:name="com.hcs.prototype.hcs_prototype.CaseStudyActivity"
             android:label="@string/title_activity_case_study" >
         </activity>
+        <activity
+            android:name="com.hcs.prototype.hcs_prototype.FinishCSActivity"
+            android:label="@string/title_activity_finish_cs" >
+        </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

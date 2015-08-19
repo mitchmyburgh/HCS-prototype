@@ -129,6 +129,8 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                     .setTitle("WOOOOOO You got it right")
                     .setMessage("The Person had" +b.getText()).show();
             UserNormal.getUser().incScore(100);
+            Intent intent = new Intent(this, FinishCSActivity.class);
+            startActivity(intent);
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("You got it wrong")
