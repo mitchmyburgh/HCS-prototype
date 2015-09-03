@@ -52,6 +52,7 @@ public class User{
      * The user's current score
      */
     private int score = 100;
+    private UserDatabase database = null;
     /**
      * Create a new user object
      */
@@ -70,6 +71,8 @@ public class User{
         this.username = username;
         this.password = password;
         this.context = context;
+        database = new UserDatabase(context);
+        //database.getRowsString();
     }
 
     /**
@@ -105,6 +108,7 @@ public class User{
         if (context != null) {
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
+
             if (users.getString(username, "no_name").equals("no_name")) {
                 currentUser = false;
                 return currentUser;

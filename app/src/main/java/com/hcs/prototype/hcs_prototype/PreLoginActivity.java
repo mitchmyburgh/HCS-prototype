@@ -22,6 +22,14 @@ public class PreLoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        UserDatabase database = new UserDatabase(this);
+        database.getRowsString();
+        new android.support.v7.app.AlertDialog.Builder(this)
+                .setTitle("WOOOOOO You got it right")
+                .setMessage(database.getRowsString()).show();
+        new android.support.v7.app.AlertDialog.Builder(this)
+                .setTitle("WOOOOOO You got it right")
+                .setMessage(database.checkPass("name", "test")+"").show();
     }
 
     @Override

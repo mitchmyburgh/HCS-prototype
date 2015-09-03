@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 21;
     /**
      * The name of the database 
      */
