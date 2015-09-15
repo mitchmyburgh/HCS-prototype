@@ -29,7 +29,7 @@ public class PreLoginActivity extends AppCompatActivity {
                 .setMessage(database.getRowsString()).show();
         new android.support.v7.app.AlertDialog.Builder(this)
                 .setTitle("WOOOOOO You got it right")
-                .setMessage(database.checkPass("name", "test")+"").show();
+                .setMessage(database.getScore("name")+"").show();
     }
 
     @Override

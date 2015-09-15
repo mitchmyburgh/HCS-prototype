@@ -110,10 +110,10 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     /**
      * Writes a new row to the user database
-     * @param name
-     * @param pass
-     * @param score
-     * @return
+     * @param name The username
+     * @param pass the user's password
+     * @param score the score
+     * @return long the row id
      */
     public long writeRow(String name, String pass, int score){
         // Gets the data repository in write mode
@@ -156,47 +156,93 @@ public class UserDatabase extends SQLiteOpenHelper {
     }
 
     /**
-     * Get All the Case Studies as a linked list of CaseStudy Objects
-     * @return List of CaseStudy objects
-     * @see CaseStudy
+     * Check the users password
+     * @param uname The username
+     * @param pass the user's password
+     * @return int (-1,0,1) = (user not in the databse, password incorrect, password correct)
      */
-    /*public List<CaseStudy> getAllCaseStudy(){
-        List<CaseStudy> csl = new LinkedList<CaseStudy>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT  * FROM " + CASE_STUDY_TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        CaseStudy cs = null;
-        if (cursor.moveToFirst()) {
-            do {
-                cs = new CaseStudy(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
-
-                // Add case study to case study list
-                csl.add(cs);
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return csl;
-    }*/
-
-    /**
-     * Get the case study with a specific Primary Key
-     * @param pk the primary key of the case study in the database
-     * @return CaseStudy the Case study referenced in the database
-     */
-   public boolean checkPass(String uname, String pass){
+   public int checkPass(String uname, String pass){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
         Cursor cursor = db.rawQuery(query, null);
         CaseStudy cs = null;
-       //db.close();
        if (cursor.moveToFirst()) {
-            return cursor.getString(2).equals(pass);
-            //cs = new CaseStudy(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), this.context);
+            if (cursor.getString(2).equals(pass)){
+                db.close();
+                return 1; //password is found in the databse
+            } else {
+                db.close();
+                return 0; //password is incorrect
+            }
         } else {
-            return false;
+           db.close();
+           return -1; //user not in the database
         }
 
         //return cs;
+    }
+
+    /**
+     * Get the user's score from the databse
+     * @param uname the username
+     * @return in the users score
+     */
+    public int getScore(String uname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            db.close();
+            return cursor.getInt(3);
+        } else {
+            db.close();
+            return -1; //user not in the database
+        }
+    }
+
+    /**
+     * Get the user's password
+     * @param uname the user's username
+     * @return String the user's password
+     */
+    public String getPass(String uname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            db.close();
+            return cursor.getString(2);
+        } else {
+            db.close();
+            return "false"; //user not in the database
+        }
+    }
+
+    /**
+     * Increment the user's score by n
+     * @param uname the user's username
+     * @param n the number to increment the score by
+     * @return Boolean the success of incrementing the score
+     */
+    public boolean incScore(String uname, int n){
+        // Gets the data repository in write mode
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
+        ContentValues values = new ContentValues();
+
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            values.put(KEY_SCORE, n+cursor.getInt(3));
+            db.update(USER_TABLE_NAME, values, "username=?", new String[] {uname});
+            db.close();
+            return true;
+        } else {
+            db.close();
+            return false; //user not in the database
+        }
     }
 
 }

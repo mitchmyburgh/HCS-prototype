@@ -61,6 +61,21 @@ public class User{
         this.password = "password";
         this.context = null;
     }
+
+    /**
+     * Create a new user object
+     * @param username the user's username
+     * @param context the context which the data will be obtained from
+     */
+    User(String username, Context context){
+        this.username = username;
+        //this.password = password;
+        this.context = context;
+        database = new UserDatabase(context);
+        this.password = database.getPass(username);
+        this.score = database.getScore(username);
+    }
+
     /**
     * Create a new user object
     * @param username the user's username
@@ -76,7 +91,7 @@ public class User{
     }
 
     /**
-     * creates a user object within the singleton, else writes ove the object
+     * creates a user object within the singleton, else writes over the object
      * @param username the username of the user
      * @param password the password of the user
      * @param context the context for pref file access
@@ -86,6 +101,19 @@ public class User{
     public static User createUser(String username, String password, Context context){
         user = null; //reset user object
         user = new User(username, password, context);
+        return user;
+    }
+
+    /**
+     * creates a user object within the singleton, else writes over the object
+     * @param username the username of the user
+     * @param context the context for pref file access
+     * @return user singleton
+     *
+     */
+    public static User createUser(String username, Context context){
+        user = null; //reset user object
+        user = new User(username, context);
         return user;
     }
 
@@ -109,13 +137,14 @@ public class User{
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
 
-            if (users.getString(username, "no_name").equals("no_name")) {
+            if (database.checkPass(username, password) == -1) {
                 currentUser = false;
                 return currentUser;
-            } else if (users.getString(username, "no_name").equals(password)) {
+            } else if (database.checkPass(username, password) == 1) {
                 currentUser = true;
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
+                score = database.getScore(username);
                 return currentUser;
             } else {
                 currentUser = false;
@@ -133,8 +162,9 @@ public class User{
         if (context != null){
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
-            if (users.getString(username, "no_name") == "no_name") {
-                usersEdit.putString(username, password);
+            if (database.checkPass(username, password) == -1) { //not in database
+                database.writeRow(username, password, 0);
+                score = database.getScore(username);
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
                 currentUser = true;
@@ -187,6 +217,7 @@ public class User{
      */
     public int incScore(int score){
         this.score += score;
+        database.incScore(username,score);
         return this.score;
     }
 
@@ -201,7 +232,7 @@ public class User{
             if (users.getString("current_user", "no_name").equals("no_name")) {
                 return false;
             } else  {
-                User.createUser(users.getString("current_user", "no_name"), users.getString(users.getString("current_user", "no_name"), "no_pass"), context);
+                User.createUser(users.getString("current_user", "no_name"), context);
                 return true;
             }
         } else {
