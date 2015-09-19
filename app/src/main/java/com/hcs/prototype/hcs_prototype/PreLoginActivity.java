@@ -1,9 +1,7 @@
 package com.hcs.prototype.hcs_prototype;
 
-import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +21,13 @@ public class PreLoginActivity extends AppCompatActivity {
         }
 
         UserDatabase database = new UserDatabase(this);
-        database.getRowsString();
+        database.getRowsStringUser();
         new android.support.v7.app.AlertDialog.Builder(this)
                 .setTitle("WOOOOOO You got it right")
-                .setMessage(database.getRowsString()).show();
+                .setMessage(database.getRowsStringUser()).show();
         new android.support.v7.app.AlertDialog.Builder(this)
                 .setTitle("WOOOOOO You got it right")
-                .setMessage(database.getScore("name")+"").show();
+                .setMessage(database.getScoreUser("name")+"").show();
     }
 
     @Override

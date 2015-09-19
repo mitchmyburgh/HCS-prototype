@@ -2,8 +2,6 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 /**
  * <h1>User Class Singleton</h1>
@@ -72,8 +70,8 @@ public class User{
         //this.password = password;
         this.context = context;
         database = new UserDatabase(context);
-        this.password = database.getPass(username);
-        this.score = database.getScore(username);
+        this.password = database.getPassUser(username);
+        this.score = database.getScoreUser(username);
     }
 
     /**
@@ -137,14 +135,14 @@ public class User{
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
 
-            if (database.checkPass(username, password) == -1) {
+            if (database.checkPassUser(username, password) == -1) {
                 currentUser = false;
                 return currentUser;
-            } else if (database.checkPass(username, password) == 1) {
+            } else if (database.checkPassUser(username, password) == 1) {
                 currentUser = true;
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
-                score = database.getScore(username);
+                score = database.getScoreUser(username);
                 return currentUser;
             } else {
                 currentUser = false;
@@ -162,9 +160,9 @@ public class User{
         if (context != null){
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
-            if (database.checkPass(username, password) == -1) { //not in database
-                database.writeRow(username, password, 0);
-                score = database.getScore(username);
+            if (database.checkPassUser(username, password) == -1) { //not in database
+                database.writeRowUser(username, password, 0);
+                score = database.getScoreUser(username);
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
                 currentUser = true;
@@ -217,7 +215,7 @@ public class User{
      */
     public int incScore(int score){
         this.score += score;
-        database.incScore(username,score);
+        database.incScoreUser(username, score);
         return this.score;
     }
 

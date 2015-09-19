@@ -11,9 +11,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class UserDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
@@ -22,7 +19,7 @@ public class UserDatabase extends SQLiteOpenHelper {
     /**
      * The name of the database
      */
-    private static final String DATABASE_NAME = "HCS";
+    private static final String DATABASE_NAME = "HCS2";
     /**
      * The name of the table containing the Case Studies in the Database.
      */
@@ -30,7 +27,7 @@ public class UserDatabase extends SQLiteOpenHelper {
     /**
      * The user id column header.
      */
-    private static final String KEY_ID  = "id";
+    private static final String KEY_ID_USER = "id";
     /**
      * The username column header.
      */
@@ -50,7 +47,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      */
     private static final String USER_TABLE_CREATE =
             "CREATE TABLE " + USER_TABLE_NAME + " (" +
-                    KEY_ID + " INTEGER PRIMARY KEY, " +
+                    KEY_ID_USER + " INTEGER PRIMARY KEY, " +
                     KEY_UN + " TEXT UNIQUE, " +
                     KEY_PASS + " TEXT, " +
                     KEY_SCORE + " INTEGER);";
@@ -115,7 +112,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * @param score the score
      * @return long the row id
      */
-    public long writeRow(String name, String pass, int score){
+    public long writeRowUser(String name, String pass, int score){
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         // Create a new map of values, where column names are the keys
@@ -137,7 +134,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * Returns the database as a string
      * @return String the database represented as a string
      */
-    public String getRowsString(){
+    public String getRowsStringUser(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
@@ -161,7 +158,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * @param pass the user's password
      * @return int (-1,0,1) = (user not in the databse, password incorrect, password correct)
      */
-   public int checkPass(String uname, String pass){
+   public int checkPassUser(String uname, String pass){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
         Cursor cursor = db.rawQuery(query, null);
@@ -187,7 +184,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * @param uname the username
      * @return in the users score
      */
-    public int getScore(String uname){
+    public int getScoreUser(String uname){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
         Cursor cursor = db.rawQuery(query, null);
@@ -206,7 +203,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * @param uname the user's username
      * @return String the user's password
      */
-    public String getPass(String uname){
+    public String getPassUser(String uname){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
         Cursor cursor = db.rawQuery(query, null);
@@ -226,7 +223,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * @param n the number to increment the score by
      * @return Boolean the success of incrementing the score
      */
-    public boolean incScore(String uname, int n){
+    public boolean incScoreUser(String uname, int n){
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
