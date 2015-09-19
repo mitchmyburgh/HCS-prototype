@@ -18,9 +18,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
+    /**
+     * List of Case Studies
+     */
     List<CaseStudy> csl;
+    /**
+     * The List View containing the case studies
+     */
+    ListView listview;
     /**
      * Creates the activity
      * @param savedInstanceState the previous saved instance
@@ -42,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //scoreDisplay.append(CaseStudy.getAllCaseString());
         csl = CaseStudy.getAllCaseStudy();
 
-        final ListView listview = (ListView) findViewById(R.id.cs_listview);
+        listview = (ListView) findViewById(R.id.cs_listview);
         /*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
                 "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
@@ -50,32 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 "Android", "iPhone", "WindowsMobile" };
 
         */
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < csl.size(); ++i) {
-            list.add(csl.get(i).toString());
-        }
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.drawCSList();
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
-                /*new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(position+"")
-                        .setMessage(csl.get(position).getId()).show();*/
-                Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("ID", csl.get(position).getPrimaryKey());
-                intent.putExtras(b);
-                startActivity(intent);
-                //view.animate().setDuration(2000).alpha(0);
-
-            }
-
-        });
     }
 
     /**
@@ -122,8 +106,15 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChosenDir(String chosenDir) { // The code in this function will be executed when the dialog OK button is pushed
                     String m_chosen = chosenDir;
-                    Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " + m_chosen, Toast.LENGTH_LONG).show();
-                    CaseStudy cs = new CaseStudy(m_chosen, MainActivity.this);
+                    //Pattern p = Pattern.compile(".*\\.hson");
+                    if (Pattern.matches(".*\\.hson", m_chosen)){
+                        Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " + m_chosen, Toast.LENGTH_LONG).show();
+                        CaseStudy cs = new CaseStudy(m_chosen, MainActivity.this);
+                        csl.add(cs);
+                        drawCSList();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Incorrect File Type: " + m_chosen, Toast.LENGTH_LONG).show();
+                    }
                 }
             }); //You can change the default filename using the public variable "Default_File_Name"
               FileOpenDialog.Default_File_Name = ""; FileOpenDialog.chooseFile_or_Dir(); ///////////////////////////////////////////////////////////////////////////////////////////////// - See more at: http://www.scorchworks.com/Blog/simple-file-dialog-for-android-applications/#sthash.RN6X6Tku.dpuf
@@ -138,6 +129,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void drawCSList(){
+        final ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0; i < csl.size(); ++i) {
+            list.add(csl.get(i).toString());
+        }
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_1, list);
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view,
+                                    int position, long id) {
+                final String item = (String) parent.getItemAtPosition(position);
+                /*new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(position+"")
+                        .setMessage(csl.get(position).getId()).show();*/
+                Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("ID", csl.get(position).getPrimaryKey());
+                intent.putExtras(b);
+                startActivity(intent);
+                //view.animate().setDuration(2000).alpha(0);
+
+            }
+
+        });
     }
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
@@ -163,5 +183,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

@@ -50,7 +50,7 @@ public class User{
      * The user's current score
      */
     private int score = 100;
-    private UserDatabase database = null;
+    private CaseStudyDatabase database = null;
     /**
      * Create a new user object
      */
@@ -69,7 +69,7 @@ public class User{
         this.username = username;
         //this.password = password;
         this.context = context;
-        database = new UserDatabase(context);
+        database = new CaseStudyDatabase(context);
         this.password = database.getPassUser(username);
         this.score = database.getScoreUser(username);
     }
@@ -84,7 +84,7 @@ public class User{
         this.username = username;
         this.password = password;
         this.context = context;
-        database = new UserDatabase(context);
+        database = new CaseStudyDatabase(context);
         //database.getRowsString();
     }
 

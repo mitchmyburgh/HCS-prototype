@@ -21,7 +21,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      */
     private static final String DATABASE_NAME = "HCS2";
     /**
-     * The name of the table containing the Case Studies in the Database.
+     * The name of the table containing the Users in the Database.
      */
     private static final String USER_TABLE_NAME = "users";
     /**
