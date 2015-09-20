@@ -512,4 +512,8 @@ public class CaseStudy {
         }
     }
 
+    public void addQuizAns(String key){
+
+    }
+
 }

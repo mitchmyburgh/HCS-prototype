@@ -32,6 +32,17 @@
 				"answer": "my name is bob3"
 			},
 			{
+				"type": "img",
+				"question": "can i see your xrays2",
+				"answer": {
+					"desc": "i have xrays of stuff2",
+					"img": ["img/gross3.png", "img/gross4.png"]
+				},
+				"quiz": "What is wrong with this image?2",
+				"quiz_answer": "You have nodes, you will never sing again2",
+				"quiz_possible": ["There is nothing wrong2", "You have globules in your lungs2"]			
+			},
+			{
 				"type": "text",
 				"question": "What is your name4?",
 				"answer": "my name is bob4"
