@@ -12,8 +12,12 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        //TextView user_nameDisplay = (TextView)findViewById(R.id.user_name);
+        //TextView cs_nameDisplay = (TextView)findViewById(R.id.cs_name);
         TextView scoreDisplay = (TextView)findViewById(R.id.score_display);
-        scoreDisplay.setText(User.getUser().getUsername()+"\n"+User.getUser().getScore());
+        //user_nameDisplay.setText(User.getUser().getUsername());
+        //cs_nameDisplay.setText(User.getUser().getHistory());
+        scoreDisplay.setText(User.getUser().getScore());
     }
 
     @Override

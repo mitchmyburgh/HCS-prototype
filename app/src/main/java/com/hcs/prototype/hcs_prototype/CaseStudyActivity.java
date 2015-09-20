@@ -16,6 +16,8 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
     CaseStudy cs;
     TextView csDescDisplay;
     TextView csDataDisplay;
+    Button[] buts = new Button[4];
+    private static final String csData="CSDATA", csDesc="CSDESC", butKeys="BUTKEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,13 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         //new AlertDialog.Builder(this).setTitle("title").setMessage(cs.loadJSONFromAsset(cs.getLocation())).show();
         csDescDisplay = (TextView)findViewById(R.id.desc_display);
         csDataDisplay = (TextView)findViewById(R.id.data_display);
-        Button[] buts = new Button[4];
+        //Button[] buts = new Button[4];
         buts[0] = (Button)findViewById(R.id.question_button_1);
         buts[1] = (Button)findViewById(R.id.question_button_2);
         buts[2] = (Button)findViewById(R.id.question_button_3);
         buts[3] = (Button)findViewById(R.id.question_button_4);
         setTitle(cs.getJSONName());
+        UserNormal.getUser().setHistory(cs.getName());
         csDescDisplay.setTypeface(null, Typeface.BOLD);
         csDescDisplay.setText(cs.getJSONDesc() + "\n");
         csDataDisplay.setText(cs.getStart()+"\n");
@@ -46,6 +49,29 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             buts[i].setVisibility(View.GONE);
         }
 
+    }
+    public void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+        outState.putString(csData, csDataDisplay.getText() + "");
+        outState.putString(csDesc, csDescDisplay.getText() + "");
+        outState.putStringArrayList(butKeys, CaseStudy.getStoreHist());
+        /*for (int i=0; i<4; i++)
+        {
+            outState.putString("B"+i, buts[i].getText()+"");
+        }*/
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        csDescDisplay.setText(savedInstanceState.getString(csDesc));
+        csDataDisplay.setText(savedInstanceState.getString(csData));
+        /*for (int i=0; i<butKeys.length(); i++)
+        {
+            CaseStudy.getAnswer(butKeys.charAt(i));
+        }*/
     }
 
     @Override
@@ -127,7 +153,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             Button b = (Button)v;
             new AlertDialog.Builder(this)
                     .setTitle("WOOOOOO You got it right")
-                    .setMessage("The Person had" +b.getText()).show();
+                    .setMessage("The Person had" + b.getText()).show();
             UserNormal.getUser().incScore(100);
             Intent intent = new Intent(this, FinishCSActivity.class);
             startActivity(intent);

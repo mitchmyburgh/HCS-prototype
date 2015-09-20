@@ -18,7 +18,7 @@ public class UserNormal extends User {
      * @param password the user's password
      * @param context the context which the data will be obtained from
      */
-    private UserNormal(String username, String password, Context context){
+    private UserNormal(String username, String password, Context context){ //history
         super(username, password, context);
     }
 }

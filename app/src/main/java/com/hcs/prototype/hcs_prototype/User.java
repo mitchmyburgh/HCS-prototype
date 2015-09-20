@@ -53,6 +53,10 @@ public class User{
      */
     private int score = 100;
     /**
+     * <h3>case study name</h3>
+     */
+    private String casestudyname = null;
+    /**
      * Create a new user object
      */
     User (){
@@ -185,6 +189,18 @@ public class User{
         this.score += score;
         return this.score;
     }
+    /**
+     * set user casestudy history
+     */
+    public String setHistory(String casestudyname)
+    {
+        this.casestudyname=casestudyname;
+        return this.casestudyname;
+    }
+    /**
+     * get user casestudy history
+     */
+    public String getHistory(){return casestudyname;}
 
     /**
      * Get the currently logged in user (for reopening the app at later time)

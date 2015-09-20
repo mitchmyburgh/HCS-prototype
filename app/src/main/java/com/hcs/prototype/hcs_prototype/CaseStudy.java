@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +32,7 @@ import java.util.Random;
  * @version %I%, %G%
  * @since 0.2 //TODO: version numbers in github
  */
+
 public class CaseStudy {
     /**
      * The primary key of teh case study in the database
@@ -68,6 +70,10 @@ public class CaseStudy {
      * JSON Object describing the case study
      */
     private JSONObject JSONobj = null;
+    /**
+     * arraylist to store sequence of answers given for questions askedd
+     */
+    private static ArrayList<String> storeHist = null;
     /**
      * History object - stores the progress on the case study
      */
@@ -456,6 +462,7 @@ public class CaseStudy {
      */
     public String[] getAnswer(String key){
         hist.addStep(key);
+        storeHist.add(key);
         String[] ans = new String[3];
         try {
             if (JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type").equals("text")){
@@ -473,6 +480,13 @@ public class CaseStudy {
         } catch (JSONException e){
             return ans;
         }
+    }
+    /**
+     * return string of arrays with history keys of questions chosen
+     */
+    public static ArrayList<String> getStoreHist()
+    {
+        return storeHist;
     }
 
     /**

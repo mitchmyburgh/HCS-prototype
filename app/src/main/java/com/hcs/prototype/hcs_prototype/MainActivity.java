@@ -2,6 +2,8 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.PersistableBundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +11,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,17 +26,24 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     List<CaseStudy> csl;
+    private String item;
+    Bundle b=new Bundle();
+   /* protected FrameLayout listViewPlaceholder;
+    protected ListView listView; //added by aziza*/
     /**
      * Creates the activity
      * @param savedInstanceState the previous saved instance
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //final Object data = getLastNonConfigurationInstance();
         setContentView(R.layout.activity_main);
         CaseStudy.createDatabase(this);
         TextView scoreDisplay = (TextView)findViewById(R.id.ls_display);
         scoreDisplay.setText("");
+        /*if (savedInstanceState != null)
+            ((activity_main)findViewById(R.id.activity_main)).restoreState(savedInstanceState);
         /*for (int i = 0; i<100; i++){
             if (CaseStudy.addCaseStudy("id"+i, "name", "desc", "type", "location") == -1){
                 //scoreDisplay.append("Duplicate case\n");
@@ -41,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
         //scoreDisplay.append(CaseStudy.getAllCaseString());
         csl = CaseStudy.getAllCaseStudy();
+        //initUI();
 
-        final ListView listview = (ListView) findViewById(R.id.cs_listview);
+        // mitch starts here
+       final ListView listview = (ListView) findViewById(R.id.cs_listview);
         /*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
                 "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
@@ -51,31 +65,32 @@ public class MainActivity extends AppCompatActivity {
 
         */
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < csl.size(); ++i) {
+        for (int i = 0; i < csl.size(); ++i)
+        {
             list.add(csl.get(i).toString());
         }
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
+
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
+                @Override
+                public void onItemClick(AdapterView<?> parent, final View view,
+                                        int position, long id) {
+                    item = (String) parent.getItemAtPosition(position);
                 /*new AlertDialog.Builder(MainActivity.this)
                         .setTitle(position+"")
                         .setMessage(csl.get(position).getId()).show();*/
-                Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("ID", csl.get(position).getPrimaryKey());
-                intent.putExtras(b);
-                startActivity(intent);
-                //view.animate().setDuration(2000).alpha(0);
+                    Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
+                    b.putInt("ID", csl.get(position).getPrimaryKey());
+                    intent.putExtras(b);
+                    startActivity(intent);
+                    //view.animate().setDuration(2000).alpha(0);
 
-            }
-
+                }
         });
+        //mitch ends here
     }
 
     /**
@@ -163,5 +178,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 }
