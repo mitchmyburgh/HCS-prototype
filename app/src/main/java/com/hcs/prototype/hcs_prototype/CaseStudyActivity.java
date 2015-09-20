@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class CaseStudyActivity extends AppCompatActivity implements View.OnClickListener {
     CaseStudy cs;
@@ -86,7 +91,55 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         } else {
             csDataDisplay.append(Html.fromHtml("<b>"+cs.getAnswer((String) view.getTag())[1]+"</b><br>"));
             csDataDisplay.append(Html.fromHtml("<b>" + cs.getAnswer((String) view.getTag())[2].split(",")[0].replace("[", "").replace("]", "")+" : " +cs.getAnswer((String) view.getTag())[2] + "</b><br>"));
-            File imgFile = new File(cs.getAnswer((String) view.getTag())[2].split(",")[0].replace("[", "").replace("]", ""));
+            if (cs.getType().equals("LOCAL")){ //get image from assets
+                int len;
+                try {
+                    String [] images = cs.getAnswer((String) view.getTag())[2].split(",");
+                    len = images.length;
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.cs_view);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    for (String img : images) {
+                        InputStream istr = this.getAssets().open(img.replace("[", "").replace("]", "").replace("\"", "").replace("\\", ""));
+                        ImageView iv = new ImageView(this);
+                        Bitmap b = ((BitmapDrawable)Drawable.createFromStream(istr, null)).getBitmap();
+                        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 300, 300, false);
+
+
+                        iv.setImageDrawable(new BitmapDrawable(getResources(), bitmapResized));
+
+                        ll.addView(iv, 2);
+                    }
+                    csDataDisplay = new TextView(this);
+                    ll.addView(csDataDisplay, 2+len);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                int len;
+                try {
+                    String path = new File(cs.getLocation()).getPath().substring(0, cs.getLocation().lastIndexOf(File.separator));;
+                    String [] images = cs.getAnswer((String) view.getTag())[2].split(",");
+                    len = images.length;
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.cs_view);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    for (String img : images) {
+                        FileInputStream istr = new FileInputStream(new File(path+"/"+img.replace("[", "").replace("]", "").replace("\"", "").replace("\\", "")));
+                        ImageView iv = new ImageView(this);
+                        Bitmap b = ((BitmapDrawable)Drawable.createFromStream(istr, null)).getBitmap();
+                        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 300, 300, false);
+
+
+                        iv.setImageDrawable(new BitmapDrawable(getResources(), bitmapResized));
+
+                        ll.addView(iv, 2);
+                    }
+                    csDataDisplay = new TextView(this);
+                    ll.addView(csDataDisplay, 2+len);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            /*File imgFile = new File(cs.getAnswer((String) view.getTag())[2].split(",")[0].replace("[", "").replace("]", ""));
             if(imgFile.exists()){
                 Log.v("TEST", "ITS WORKING");
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -98,7 +151,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 ll.addView(iv, lp);
 
-            }
+            }*/
 
         }
         Button[] buts = new Button[4];
@@ -159,4 +212,5 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                     .setMessage("You Are Wrong").show();
         }
     }
+
 }

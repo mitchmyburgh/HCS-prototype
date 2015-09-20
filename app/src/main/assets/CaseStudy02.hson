@@ -15,7 +15,7 @@
 				"question": "can i see your xrays",
 				"answer": {
 					"desc": "i have xrays of stuff",
-					"img": ["img/gross3.jpg", "img/gross4.jpg"]
+					"img": ["img/gross3.png", "img/gross4.png", "img/gross4.png", "img/gross4.png"]
 				}				
 			},
 			{

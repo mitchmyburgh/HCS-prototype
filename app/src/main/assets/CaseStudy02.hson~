@@ -1,0 +1,43 @@
+{
+	"CASESTUDY2":{
+		"metadata":{
+			"name": "Wooo a name", "description": "This is a description"		
+		},
+		"casestudy":{
+			"start": "a man came in and is sick",
+			"questions":[{
+				"type": "text",
+				"question": "What is your name?",
+				"answer": "my name is bob"
+			},
+			{
+				"type": "img",
+				"question": "can i see your xrays",
+				"answer": {
+					"desc": "i have xrays of stuff",
+					"img": ["img/gross3.png", "img/gross4.png"]
+				}				
+			},
+			{
+				"type": "text",
+				"question": "What is your name2?",
+				"answer": "my name is bob2"
+			},
+			{
+				"type": "text",
+				"question": "What is your name3?",
+				"answer": "my name is bob3"
+			},
+			{
+				"type": "text",
+				"question": "What is your name4?",
+				"answer": "my name is bob4"
+			}
+			],
+			"diagnosis":{
+				"correct": "TB",
+				"possible":["AIDS", "CANCER", "DISEASE", "ANOTHER DISEASE", "ONE MORE DISEASE"]
+			}
+		}
+	}
+}

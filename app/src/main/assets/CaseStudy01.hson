@@ -15,8 +15,11 @@
 				"question": "can i see your xrays",
 				"answer": {
 					"desc": "i have xrays of stuff",
-					"img": ["img/gross3.jpg", "img/gross4.jpg"]
-				}				
+					"img": ["img/gross3.png", "img/gross4.png"]
+				},
+				"quiz": "What is wrong with this image?",
+				"quiz_answer": "You have nodes, you will never sing again",
+				"quiz_possible": ["There is nothing wrong", "You have globules in your lungs"]			
 			},
 			{
 				"type": "text",
