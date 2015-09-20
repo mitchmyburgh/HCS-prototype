@@ -456,7 +456,7 @@ public class CaseStudy {
      */
     public String[] getAnswer(String key){
         hist.addStep(key);
-        String[] ans = new String[3];
+        String[] ans = new String[6];
         try {
             if (JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type").equals("text")){
                 ans[0] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type");
@@ -466,6 +466,9 @@ public class CaseStudy {
                 ans[0] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("type");
                 ans[1] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONObject("answer").getString("desc");
                 ans[2] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONObject("answer").getJSONArray("img").toString();
+                ans[3] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("quiz");
+                ans[4] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("quiz_answer");
+                ans[5] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONArray("quiz_possible").toString();
                 return ans;
             } else {
                 return ans;

@@ -88,6 +88,21 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         csDataDisplay.append(((Button) view).getText().toString() + "\n");
         if (cs.getAnswer((String)view.getTag())[0].equals("text")) {
             csDataDisplay.append(Html.fromHtml("<b>"+cs.getAnswer((String) view.getTag())[1]+"</b><br>"));
+            Button[] buts = new Button[4];
+            buts[0] = (Button)findViewById(R.id.question_button_1);
+            buts[1] = (Button)findViewById(R.id.question_button_2);
+            buts[2] = (Button)findViewById(R.id.question_button_3);
+            buts[3] = (Button)findViewById(R.id.question_button_4);
+            String[][] sa = cs.getNextButtons();
+            for (int i = 0; i < sa[0].length; i++){
+                //csDataDisplay.append(sa[0][i] + "\n");
+                buts[i].setText(sa[0][i]);
+                buts[i].setTag(sa[1][i]);
+                buts[i].setVisibility(View.VISIBLE);
+            }
+            for (int i = sa[0].length; i <4; i++){
+                buts[i].setVisibility(View.GONE);
+            }
         } else {
             csDataDisplay.append(Html.fromHtml("<b>"+cs.getAnswer((String) view.getTag())[1]+"</b><br>"));
             csDataDisplay.append(Html.fromHtml("<b>" + cs.getAnswer((String) view.getTag())[2].split(",")[0].replace("[", "").replace("]", "")+" : " +cs.getAnswer((String) view.getTag())[2] + "</b><br>"));
@@ -139,6 +154,41 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 }
             }
+            csDataDisplay.append(Html.fromHtml("<b>" + cs.getAnswer((String) view.getTag())[3] + "</b><br>"));
+            String [] answers = cs.getAnswer((String) view.getTag())[5].split(",");
+            int i = 0;
+            LinearLayout ll = (LinearLayout) findViewById(R.id.cs_view);
+            Button myButton = new Button(this);
+            myButton.setText(cs.getAnswer((String) view.getTag())[4]);
+            myButton.setTag(i);
+            //myButton.setOnClickListener(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            ll.addView(myButton, lp);
+            i++;
+            for (String ans : answers){
+                myButton = new Button(this);
+                myButton.setText(ans);
+                myButton.setTag(i);
+                myButton.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        new AlertDialog.Builder(CaseStudyActivity.this) 
+                                .setTitle("You got it wrong")
+                                .setMessage("You Are Wrong").show();
+                    }
+                });
+                lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                ll.addView(myButton, lp);
+                i++;
+            }
+            Button[] buts = new Button[5];
+            buts[0] = (Button)findViewById(R.id.question_button_1);
+            buts[1] = (Button)findViewById(R.id.question_button_2);
+            buts[2] = (Button)findViewById(R.id.question_button_3);
+            buts[3] = (Button)findViewById(R.id.question_button_4);
+            buts[4] = (Button)findViewById(R.id.diag_button);
+            for (i = 0; i <5; i++){
+                buts[i].setVisibility(View.GONE);
+            }
             /*File imgFile = new File(cs.getAnswer((String) view.getTag())[2].split(",")[0].replace("[", "").replace("]", ""));
             if(imgFile.exists()){
                 Log.v("TEST", "ITS WORKING");
@@ -154,20 +204,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             }*/
 
         }
-        Button[] buts = new Button[4];
-        buts[0] = (Button)findViewById(R.id.question_button_1);
-        buts[1] = (Button)findViewById(R.id.question_button_2);
-        buts[2] = (Button)findViewById(R.id.question_button_3);
-        buts[3] = (Button)findViewById(R.id.question_button_4);
-        String[][] sa = cs.getNextButtons();
-        for (int i = 0; i < sa[0].length; i++){
-            //csDataDisplay.append(sa[0][i] + "\n");
-            buts[i].setText(sa[0][i]);
-            buts[i].setTag(sa[1][i]);
-        }
-        for (int i = sa[0].length; i <4; i++){
-            buts[i].setVisibility(View.GONE);
-        }
+
     }
 
     /**
