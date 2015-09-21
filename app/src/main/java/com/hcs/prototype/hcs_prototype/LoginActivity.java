@@ -166,7 +166,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                 //b.putParcelable("USER", user);
                 //intent.putExtras(b);
                 startActivity(intent);
-                //finish();
+                finish();
             } else if (UserNormal.getUser().login() == 0){
                 mPasswordView.setError(getString(R.string.error_invalid_password));
                 focusView = mPasswordView;

@@ -138,7 +138,8 @@ public class RegisterActivity extends ActionBarActivity {
                 b.putParcelable("USER", user);
                 intent.putExtras(b);*/
                 startActivity(intent);
-                //finish();
+                finish();
+
             } else {
                 mEmailView.setError(getString(R.string.error_field_inDB));
                 focusView = mEmailView;

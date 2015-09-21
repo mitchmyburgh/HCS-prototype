@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreLoginActivity.getAct().finish();
         CaseStudy.createDatabase(this);
         TextView scoreDisplay = (TextView)findViewById(R.id.ls_display);
         scoreDisplay.setText("");
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             if (User.getUser().logout()) {
                 Intent intent = new Intent(this, PreLoginActivity.class);
                 startActivity(intent);
+                finish();
             }
             return true;
         }
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Handle back button pressed
      */
-    @Override
+    /*@Override
     public void onBackPressed() {
 
         new AlertDialog.Builder(this)
@@ -184,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
         //finish();
         return;
-    }
+    }*/
 
     /**
      * Array Adapter for printing the List of Case studies

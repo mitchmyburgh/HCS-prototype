@@ -99,7 +99,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             buts[i].setTag(sa[1][i]);
         }
         //Hide buttons when there are less than 4 questions
-        for (int i = sa[0].length; i <4; i++) {
+        for (int i = sa[0].length; i <4; i++){
             buts[i].setVisibility(View.GONE);
         }
     }
@@ -165,7 +165,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                     }
                     csDataDisplay = new TextView(this);
                     ll.addView(csDataDisplay, numViews);
-                    numViews++;
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -263,17 +263,17 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (cs.checkDiag((String)v.getTag())){
             Button b = (Button)v;
-            new AlertDialog.Builder(this)
-                    .setTitle("WOOOOOO You got it right")
-                    .setMessage("The Person had" +b.getText()).show();
+
             UserNormal.getUser().incScore(100);
             CaseStudy.clearCS();
             Intent intent = new Intent(this, FinishCSActivity.class);
             startActivity(intent);
+            finish();
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("You got it wrong")
                     .setMessage("You Are Wrong").show();
+            csDataDisplay.append(Html.fromHtml("<font color='#EE0000'>" + ((Button) v).getText() + ": is wrong</font><br>"));
         }
     }
 

@@ -1,5 +1,6 @@
 package com.hcs.prototype.hcs_prototype;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,10 +10,14 @@ import android.content.Intent;
 
 
 public class PreLoginActivity extends AppCompatActivity {
-
+    /**
+     * Store the current activity so it can be finished on login
+     */
+    public static Activity me = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        me = this;
         setContentView(R.layout.activity_prelogin);
 
         if (User.getCurrentUser(this)){
@@ -64,5 +69,8 @@ public class PreLoginActivity extends AppCompatActivity {
         } else if (User.getUser().login()){
             startActivity(intent);
         }*/
+    }
+    public static Activity getAct(){
+        return me;
     }
 }
