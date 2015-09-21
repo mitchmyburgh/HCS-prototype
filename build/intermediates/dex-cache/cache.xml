@@ -2,186 +2,186 @@
 <items version="2" >
 
     <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-91a7be13be6ffca11205b0022f97575a21cf660a.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-a788c3ab80bf0dbb60f188b432a2ca722f6db480.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-621a9de1beede03a6cc0c63d2584a3a2af748071.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-8d13314ac3bf7b1d49dc7e91062c5a5f9833324f.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-2340a4b7df9ca164ab2b8f0da47f7a6a518b51fe.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-8e932a552de0428c28ad9fdcd93453cfcd5464b2.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a78183f30e769a98ab4820794f597763088d3065">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-d7841c556989901a880502616aa3c95f8ca24195.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-b30c8380253249b25f1a53aebaafa51731f14500.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-c1511d9061a054fb4cf913ed21a6c7067610e001.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-6d54ae5e67163726fa732f9469483f83df5361ce.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-c7c2bbf62341fd81be6b3ed4ea903cc09870dd26.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-f211bdc6cce136dd8811a6187598f8b6e7a3924d.jar" />
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-a3d198cc1a9e63e28d26e2de134b7c574161f212.jar" />
     </item>
     <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-b43fc63c9938d3cf1974bc89bcbdc487010136cb.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-d4636af30b8d115e95a723864d6712d0f7de31d4.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-37534823f759f60ceadbc9e7d9fbcb240a2ff903.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-83e9675c1a4c0dd35adc26188e08e38f1558fa62.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-e561fbafd87970d4bea90b3cd8f891d8109b87d8.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-d7658f3501b5276d8d114c96048e4700883d570a.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-ed80805851ee06965feb495c0802b63833767875.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-e0252037206a1905c26acf8eec0a8cfb7521a4f5.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-1466d9b623f5797665c54a568a4ad3dfff573f7c.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-a85422e10e6c867fc6e8d5380fcb9d74f0be74f0.jar" />
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-bf0c045f14ce863a11c7becf6a7a5e17d16b11df.jar" />
     </item>
     <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-9a6ce6a79b2d83dff6ad22395c4871824461ff09.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-632b6717fbe3112e050f0e715c5e331388af4a7e.jar" />
-    </item>
-    <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-231501accae7a546f2a6e5fc58ad6773600e3599.jar" />
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-52efd1c4dfbdb6059a80dc31f3929d3d98a71ae6.jar" />
     </item>
     <item
-        jar="/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-bb2fce9e8f5009b2159b857d3b9d2893b445569d.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-0396705d3c445c36ac5a5281c0691ced17eabd6a.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-27a7e2f09375c79bdd33a4974d63a002f8bf731f.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-77a656698377ff40710b64e303c1c2681fdddab8.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-9d5e5d674e45744eda317a21868cf3d16f83d617.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-0f5a2fc418acb6b209ec561d52b4a66f28e1dcf9.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-c0d41c68a97a45b9a3da71edd4ff89ff4c5c2e67.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-03928f71c538702605fa9c8b29161ae89b9cdda5.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-756d4608c3847fd896adcf51ef18b9fa8e3d442d.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-b40747a39fad764898415e77e2c600419d4e8ce2.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-591a46d6d3c50fe7c3e2c0c625105ab197638dc7.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-8a23155b3f14548b5c634f3b6554a87c56d85cac.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-7204a56cb3c0129b736369a515f77e01d753e508.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a78183f30e769a98ab4820794f597763088d3065">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-4d04990ccb9825789e5db1317dc1941087f300a0.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-a414b664fe90b1a3e6c81e6ae7f556838b1eae58.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-0985ca8579302f70355413fb09ad167269842ed3.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-2ff3b7679c833a50bbbb96e3f40b0312232a4ef1.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-bc091f66d8231b384d5376560183f4a0195ed176.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-8110b8f9a8bac370f42e8b34a85177fd89b25d88.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-c02e22830b100d7bb691a686113fb2232cc84b2e.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-2176662a468f5fe384870f58f9c9be31320fedf5.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-3ad4f90939f2c0101fcdf076a1e281534894ebc4.jar" />
+    </item>
+    <item
+        jar="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="d405025c600055237c171a0bbabaa49d69696573">
-        <dex dex="/home/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-f1c865214f2e7fd43f33e4e4b286775303498d29.jar" />
+        <dex dex="/Users/mitch/Documents/HCS-prototype/app/build/intermediates/pre-dexed/debug/classes-0033c401e625c3d8d649eb9240704e2c3c6e93e9.jar" />
     </item>
 
 </items>

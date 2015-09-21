@@ -50,6 +50,7 @@
         </activity>
         <activity
             android:name=".CaseStudyActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_case_study" >
         </activity>
         <activity

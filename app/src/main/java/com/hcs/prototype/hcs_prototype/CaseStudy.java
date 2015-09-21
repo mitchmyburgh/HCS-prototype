@@ -73,6 +73,15 @@ public class CaseStudy {
      */
     private History hist = null;
     /**
+     * <h2>Case Study cs_ = null<h2>
+     * The CaseStudy object that represents the currently stored user, the class stores its own object - necessary for being a singleton.
+     */
+    private static CaseStudy cs_ = null;
+    /**
+     * Check whether the user is in a picture question
+     */
+    private boolean inPicQuestion = false;
+    /**
      * Default Contructor to create a new case study object using the primary key
      */
     public CaseStudy (){
@@ -196,9 +205,11 @@ public class CaseStudy {
     public static CaseStudy getCaseStudy(int pk, Context context){
         database = new CaseStudyDatabase(context);
         if (database == null){
-            return new CaseStudy();
+            cs_ = new CaseStudy();
+            return cs_;
         } else {
-            return database.getCaseStudy(pk);
+            cs_ = database.getCaseStudy(pk);
+            return cs_;
         }
     }
     
@@ -469,6 +480,7 @@ public class CaseStudy {
                 ans[3] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("quiz");
                 ans[4] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("quiz_answer");
                 ans[5] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONArray("quiz_possible").toString();
+                inPicQuestion = true;
                 return ans;
             } else {
                 return ans;
@@ -513,7 +525,33 @@ public class CaseStudy {
     }
 
     public void addQuizAns(String key){
+        if (key.equals("0")){
+            inPicQuestion = false;
+        }
 
+    }
+
+    /**
+     * get the current Case Study object
+     * @return CaseStudy Case study singleton
+     * @see User
+     */
+    public static CaseStudy getCS() {
+        if (cs_ == null){
+            return null;
+        }
+        return cs_;
+    }
+
+    /**
+     * Set the case study singleton to null
+     */
+    public static void clearCS() {
+        cs_ = null;
+    }
+
+    public boolean isInPicQuestion (){
+        return inPicQuestion;
     }
 
 }

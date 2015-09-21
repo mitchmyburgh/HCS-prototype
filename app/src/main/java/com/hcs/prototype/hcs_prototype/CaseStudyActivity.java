@@ -1,6 +1,8 @@
 package com.hcs.prototype.hcs_prototype;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -18,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,6 +54,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
      */
     Button[] buts;
 
+
     /**
      * Create the activity
      * @param savedInstanceState The saved instance state
@@ -61,7 +65,11 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_case_study);
         int id = getIntent().getExtras().getInt("ID");//CS id
         //create the case study
-        cs = CaseStudy.getCaseStudy(id, this);
+        if (CaseStudy.getCS() != null){
+            cs = CaseStudy.getCS();
+        } else {
+            cs = CaseStudy.getCaseStudy(id, this);
+        }
         setTitle(cs.getJSONName());
         //Text displays
         csDescDisplay = (TextView)findViewById(R.id.desc_display);
@@ -90,6 +98,9 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             buts[i].setVisibility(View.GONE);
         }
 
+        if (cs.isInPicQuestion()){
+
+        }
     }
 
 
@@ -252,6 +263,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                     .setTitle("WOOOOOO You got it right")
                     .setMessage("The Person had" +b.getText()).show();
             UserNormal.getUser().incScore(100);
+            CaseStudy.clearCS();
             Intent intent = new Intent(this, FinishCSActivity.class);
             startActivity(intent);
         } else {
@@ -278,5 +290,41 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             ar[i] = a;
         }
         return ar;
+    }
+
+    /**
+     * Handle back button pressed
+     */
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Exit Case Study?")
+                .setMessage("Your Progress will not be saved").setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                CaseStudy.clearCS();
+                                finish();
+                            }
+                        }).setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Write your code here to invoke NO event
+                                dialog.cancel();
+                            }
+                        }).show();
+        //finish();
+        return;
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 }
