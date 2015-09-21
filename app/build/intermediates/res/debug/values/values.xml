@@ -243,6 +243,11 @@
     <!-- From: file:/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <!-- From: file:/home/mitch/Documents/HCS-prototype/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="Home">Home</string>
+    <!-- From: file:/home/mitch/Documents/HCS-prototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
+    <eat-comment/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
     <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
