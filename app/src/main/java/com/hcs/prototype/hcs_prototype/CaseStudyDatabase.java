@@ -72,6 +72,12 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      */
     private static final String KEY_SCORE = "Score";
 
+    private static final String HIST_TABLE_NAME = "history";
+    private static final String HIST_KEY = "hist";
+
+    /**
+     * The context for acessing the databse
+     */
     private static Context context = null;
     /**
      * The String for creating the table
@@ -95,6 +101,15 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                     KEY_TYPE + " TEXT);";
 
     /**
+     * The String for creating the table
+     */
+    private static final String HIST_TABLE_CREATE =
+            "CREATE TABLE " + HIST_TABLE_NAME + " (" +
+                    KEY_ID + " INTEGER PRIMARY KEY, " +
+                    KEY_CASE_ID + " INTEGER, " +
+                    HIST_KEY + " TEXT);";
+
+    /**
      * Constructor
      * @param context the context for opening the database
      */
@@ -114,6 +129,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         //Create Databases
         db.execSQL(CASE_STUDY_TABLE_CREATE);
         db.execSQL(USER_TABLE_CREATE);
+        db.execSQL(HIST_TABLE_CREATE);
         //put some examples in the database
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY1");
@@ -425,6 +441,26 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
             db.close();
             return false; //user not in the database
         }
+    }
+
+    public long writeRowHistory(int CSPK, String Hist){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(KEY_CASE_ID, CSPK);
+        values.put(HIST_KEY, Hist);
+
+        long newRowId = db.insert(
+                HIST_TABLE_NAME,
+                "null",
+                values);
+        Log.v("database", newRowId + "");
+        db.close();
+        return newRowId;
+    }
+
+    public List<History> getMyHist(String username){
+        return new LinkedList<History>();
     }
 
 }

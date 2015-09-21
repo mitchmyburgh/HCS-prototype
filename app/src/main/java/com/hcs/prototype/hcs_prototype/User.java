@@ -49,7 +49,7 @@ public class User{
      * <h2>int score</h2>
      * The user's current score
      */
-    private int score = 100;
+    private int score = 0;
     private CaseStudyDatabase database = null;
     /**
      * Create a new user object

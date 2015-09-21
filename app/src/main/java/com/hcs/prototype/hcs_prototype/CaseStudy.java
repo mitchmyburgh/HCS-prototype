@@ -78,10 +78,6 @@ public class CaseStudy {
      */
     private static CaseStudy cs_ = null;
     /**
-     * Check whether the user is in a picture question
-     */
-    private boolean inPicQuestion = false;
-    /**
      * Default Contructor to create a new case study object using the primary key
      */
     public CaseStudy (){
@@ -140,7 +136,7 @@ public class CaseStudy {
         this.location = location;
         this.type = type;
         this.context = context;
-        this.hist = new History(pk, id);
+        this.hist = new History(pk, id, context);
         this.cacheJSON(); //Cache the JSON data
         //this.context = context;
         //this.save(); //save new case study to database
@@ -273,7 +269,7 @@ public class CaseStudy {
      */
     @Override
     public String toString(){
-        return this.id+", "+this.name+"\n"+this.description;
+        return "Name: "+this.name+"\n"+"ID: "+this.id+"\nDescription: "+this.description;
     }
     /**
      * Get the JSON data for the Case Study
@@ -480,7 +476,6 @@ public class CaseStudy {
                 ans[3] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("quiz");
                 ans[4] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getString("quiz_answer");
                 ans[5] = JSONobj.getJSONObject("casestudy").getJSONArray("questions").getJSONObject(Integer.valueOf(key)).getJSONArray("quiz_possible").toString();
-                inPicQuestion = true;
                 return ans;
             } else {
                 return ans;
@@ -518,15 +513,20 @@ public class CaseStudy {
      */
     public boolean checkDiag (String key){
         if (key.equals("0")){
+            hist.addAnswer(key, true);
+            hist.save();
             return true;
         } else {
+            hist.addAnswer(key, false);
             return false;
         }
     }
 
-    public void addQuizAns(String key){
-        if (key.equals("0")){
-            inPicQuestion = false;
+    public void addQuizAns(String key, String ans){
+        if (ans.equals("0")){
+            hist.addImageAnswer(key, ans, true);
+        } else {
+            hist.addImageAnswer(key, ans, false);
         }
 
     }
@@ -550,8 +550,19 @@ public class CaseStudy {
         cs_ = null;
     }
 
-    public boolean isInPicQuestion (){
-        return inPicQuestion;
+    /**
+     * Return the score for this case study
+     * @return teh score for the case study
+     */
+    public int getScore(){
+        return hist.getScore();
     }
 
+    public JSONArray getTips(){
+        try{
+            return JSONobj.getJSONArray("tips");
+        } catch (JSONException e){
+            return new JSONArray();
+        }
+    }
 }

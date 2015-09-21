@@ -181,7 +181,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             myButton.setOnClickListener(new Button.OnClickListener() { //you got the answer correct
                 public void onClick(View v) {
                     csDataDisplay.append(Html.fromHtml("<b style='colour: red'>" + ((Button) v).getText() + "</b><br>"));
-                    cs.addQuizAns(((Button) v).getTag().toString());
+                    cs.addQuizAns(currentQuestion, ((Button) v).getTag().toString());
                     for (Button but : QuizButs) {
                         but.setVisibility(View.GONE);
                     }
@@ -208,7 +208,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                 myButton.setOnClickListener(new Button.OnClickListener() {
                     public void onClick(View v) {
                         csDataDisplay.append(Html.fromHtml("<font color='#EE0000'>" + ((Button) v).getText() + ": is wrong</font><br>"));
-                        cs.addQuizAns(((Button) v).getTag().toString());
+                        cs.addQuizAns(currentQuestion, ((Button) v).getTag().toString());
                     }
                 });
                 lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -242,7 +242,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         buts = new Button[diags[0].length];
         for (int i = 0; i< diags[0].length; i++){
             Button myButton = new Button(this);
-            myButton.setText(diags[1][i]+" "+diags[0][i]);
+            myButton.setText(diags[0][i]);
             myButton.setTag(diags[1][i]);
             myButton.setOnClickListener(this);
 
@@ -257,15 +257,14 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
 
     /**
      * Handle click of the diagnosis
-     * @param v teh button clicked
+     * @param v the button clicked
      */
     @Override
     public void onClick(View v) {
         if (cs.checkDiag((String)v.getTag())){
             Button b = (Button)v;
-
-            UserNormal.getUser().incScore(100);
-            CaseStudy.clearCS();
+            UserNormal.getUser().incScore(cs.getScore());
+            //CaseStudy.clearCS();
             Intent intent = new Intent(this, FinishCSActivity.class);
             startActivity(intent);
             finish();

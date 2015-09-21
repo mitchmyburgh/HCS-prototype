@@ -52,6 +52,7 @@
 				"correct": "TB",
 				"possible":["AIDS", "CANCER", "DISEASE", "ANOTHER DISEASE", "ONE MORE DISEASE"]
 			}
-		}
+		},
+		"tips": ["Bst to first ask history", "then explore the history", "other tips", "this is freeform and the creator can write whatever here"]
 	}
 }

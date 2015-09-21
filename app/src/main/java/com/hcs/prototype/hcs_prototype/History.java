@@ -1,5 +1,8 @@
 package com.hcs.prototype.hcs_prototype;
 
+import android.content.Context;
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +26,10 @@ public class History {
      */
     private String id;
     /**
+     * The context for accessing the databse
+     */
+    private Context context = null;
+    /**
      * Default Constructor
      */
     public History(){
@@ -43,6 +50,26 @@ public class History {
 
         try {
             hist.put("answer", new JSONArray());
+            hist.put("score", 100);
+        } catch (JSONException e) {
+        }
+    }
+
+    /**
+     * Constructor
+     * @param pk The primary key of the case study
+     * @param id The id of the case study
+     * @param c The context for accessing the databse
+     */
+    public History(int pk, String id, Context c){
+        this.CSPK = pk;
+        this.id = id;
+        this.context = c;
+        hist = new JSONObject();
+
+        try {
+            hist.put("answer", new JSONArray());
+            hist.put("score", 100);
         } catch (JSONException e) {
         }
     }
@@ -70,9 +97,12 @@ public class History {
      * @param ans the number of the answer to the question
      * @return boolean if the insert was successful
      */
-    public boolean addImageAnswer(String key, String ans){
+    public boolean addImageAnswer(String key, String ans, boolean right){
         try {
             hist.getJSONArray(key).put(ans);
+            if (!right){
+                hist.put("score", hist.getInt("score")-5);
+            }
             return true;
         } catch (JSONException e) {
             return false;
@@ -84,12 +114,27 @@ public class History {
      * @param ans
      * @return
      */
-    public boolean addAnswer(String ans){
+    public boolean addAnswer(String ans, boolean right){
         try {
             hist.getJSONArray("answer").put(ans);
+            if (!right){
+                hist.put("score", hist.getInt("score")-10);
+            }
             return true;
         } catch (JSONException e) {
             return false;
+        }
+    }
+
+    /**
+     * Get the score for this case study
+     * @return the score for this case study
+     */
+    public int getScore(){
+        try {
+            return hist.getInt("score");
+        } catch (JSONException e) {
+            return -1;
         }
     }
 
@@ -107,7 +152,16 @@ public class History {
      * @return int the length of the history object
      */
     public int length(){
-        return hist.length();
+        Log.v("LENGTH", (hist.length()-2)+"");
+        return hist.length()-2;
+    }
+
+    public boolean save(){
+        if ((new CaseStudyDatabase(context)).writeRowHistory(this.CSPK, this.hist.toString())!= -1){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
