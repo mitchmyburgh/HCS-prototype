@@ -29,6 +29,7 @@ public class History {
      * The context for accessing the databse
      */
     private Context context = null;
+
     /**
      * Default Constructor
      */
@@ -41,11 +42,9 @@ public class History {
     /**
      * Constructor
      * @param pk The primary key of the case study
-     * @param id The id of the case study
      */
-    public History(int pk, String id){
+    public History(int pk){
         this.CSPK = pk;
-        this.id = id;
         hist = new JSONObject();
 
         try {
@@ -53,6 +52,20 @@ public class History {
             hist.put("score", 100);
         } catch (JSONException e) {
         }
+    }
+    /**
+     * Constructor
+     * @param pk The primary key of the case study
+     * @param json The json data for teh case study
+     */
+    public History(int pk, String json){
+        this.CSPK = pk;
+        try {
+            hist = new JSONObject(json);
+        } catch (JSONException e) {
+            hist = new JSONObject();
+        }
+
     }
 
     /**
@@ -157,11 +170,15 @@ public class History {
     }
 
     public boolean save(){
-        if ((new CaseStudyDatabase(context)).writeRowHistory(this.CSPK, this.hist.toString())!= -1){
+        if ((new CaseStudyDatabase(context)).writeRowHistory(this.CSPK, this.hist.toString(), User.getUser().getUsername())!= -1){
             return true;
         } else {
             return false;
         }
+    }
+
+    public String toString(Context context){
+        return ((CaseStudy)(new CaseStudyDatabase(context)).getCaseStudy(this.CSPK)).getJSONName()+" SCORE: "+this.getScore();
     }
 
 }

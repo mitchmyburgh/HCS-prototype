@@ -118,7 +118,7 @@ public class CaseStudy {
         this.description = description;
         this.location = location;
         this.type = type;
-        this.hist = new History(pk, id);
+        this.hist = new History(pk);
     }
     /**
      * create a new CaseStudy object
@@ -552,7 +552,7 @@ public class CaseStudy {
 
     /**
      * Return the score for this case study
-     * @return teh score for the case study
+     * @return the score for the case study
      */
     public int getScore(){
         return hist.getScore();

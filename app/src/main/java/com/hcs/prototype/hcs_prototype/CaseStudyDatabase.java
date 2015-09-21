@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 24;
+    private static final int DATABASE_VERSION = 25;
     /**
      * The name of the database 
      */
@@ -107,7 +107,9 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
             "CREATE TABLE " + HIST_TABLE_NAME + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY, " +
                     KEY_CASE_ID + " INTEGER, " +
-                    HIST_KEY + " TEXT);";
+                    KEY_UN + " TEXT, " +
+                    HIST_KEY + " TEXT, "+
+                    "FOREIGN KEY ("+KEY_UN+") REFERENCES "+USER_TABLE_NAME+" ("+KEY_UN+"));";
 
     /**
      * Constructor
@@ -443,12 +445,13 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public long writeRowHistory(int CSPK, String Hist){
+    public long writeRowHistory(int CSPK, String Hist, String username){
         SQLiteDatabase db = this.getWritableDatabase();
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, CSPK);
         values.put(HIST_KEY, Hist);
+        values.put(KEY_UN, username);
 
         long newRowId = db.insert(
                 HIST_TABLE_NAME,
@@ -460,7 +463,22 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     }
 
     public List<History> getMyHist(String username){
-        return new LinkedList<History>();
+        //return new LinkedList<History>();
+        List<History> hl = new LinkedList<History>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + HIST_TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        History hist = null;
+        if (cursor.moveToFirst()) {
+            do {
+                hist = new History(cursor.getInt(1), cursor.getString(3));
+
+                // Add case study to case study list
+                hl.add(hist);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return hl;
     }
 
 }

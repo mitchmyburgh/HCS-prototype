@@ -1,10 +1,20 @@
 package com.hcs.prototype.hcs_prototype;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -13,7 +23,31 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         TextView scoreDisplay = (TextView)findViewById(R.id.score_display);
-        scoreDisplay.setText(User.getUser().getUsername()+"\n"+User.getUser().getScore());
+        scoreDisplay.setText(User.getUser().getUsername() + "\n" + User.getUser().getScore());
+        ListView listview = (ListView) findViewById(R.id.hist_listview);
+        List<History> hl = (new CaseStudyDatabase(this)).getMyHist(User.getUser().getUsername());
+        final ArrayList<String> list = new ArrayList<String>();
+        for (History hist : hl){
+            list.add(hist.toString(this));
+        }
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_1, list);
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view,
+                                    int position, long id) {
+                final String item = (String) parent.getItemAtPosition(position);
+                /*new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(position+"")
+                        .setMessage(csl.get(position).getId()).show();*/
+
+                //view.animate().setDuration(2000).alpha(0);
+
+            }
+
+        });
     }
 
     @Override
@@ -36,5 +70,29 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private class StableArrayAdapter extends ArrayAdapter<String> {
+
+        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+        public StableArrayAdapter(Context context, int textViewResourceId,
+                                  List<String> objects) {
+            super(context, textViewResourceId, objects);
+            for (int i = 0; i < objects.size(); ++i) {
+                mIdMap.put(objects.get(i), i);
+            }
+        }
+
+        @Override
+        public long getItemId(int position) {
+            String item = getItem(position);
+            return mIdMap.get(item);
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
     }
 }

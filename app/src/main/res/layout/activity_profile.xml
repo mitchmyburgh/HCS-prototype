@@ -8,5 +8,9 @@
 
     <TextView android:id="@+id/score_display" android:text="@string/hello_world"  android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/hist_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
