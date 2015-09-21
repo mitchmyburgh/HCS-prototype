@@ -1,6 +1,7 @@
 package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -159,6 +160,35 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+    /**
+     * Handle back button pressed
+     */
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Exit Case Study?")
+                .setMessage("Your Progress will not be saved").setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        CaseStudy.clearCS();
+                        finish();
+                    }
+                }).setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to invoke NO event
+                        dialog.cancel();
+                    }
+                }).show();
+        //finish();
+        return;
+    }
+
+    /**
+     * Array Adapter for printing the List of Case studies
+     */
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

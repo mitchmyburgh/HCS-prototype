@@ -130,26 +130,26 @@ public class User{
      * Login the current user
      * @return boolean whether the user is logged in
      */
-    public boolean login() {
+    public int login() {
         if (context != null) {
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
 
             if (database.checkPassUser(username, password) == -1) {
                 currentUser = false;
-                return currentUser;
+                return -1;
             } else if (database.checkPassUser(username, password) == 1) {
                 currentUser = true;
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
                 score = database.getScoreUser(username);
-                return currentUser;
+                return 1;
             } else {
                 currentUser = false;
-                return currentUser;
+                return 0;
             }
         } else {
-            return currentUser;
+            return -2;
         }
     }
     /**

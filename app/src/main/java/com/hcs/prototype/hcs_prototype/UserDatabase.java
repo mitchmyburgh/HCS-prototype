@@ -156,7 +156,7 @@ public class UserDatabase extends SQLiteOpenHelper {
      * Check the users password
      * @param uname The username
      * @param pass the user's password
-     * @return int (-1,0,1) = (user not in the databse, password incorrect, password correct)
+     * @return int (-1,0,1) = (user not in the database, password incorrect, password correct)
      */
    public int checkPassUser(String uname, String pass){
         SQLiteDatabase db = this.getReadableDatabase();

@@ -19,15 +19,6 @@ public class PreLoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
-
-        UserDatabase database = new UserDatabase(this);
-        database.getRowsStringUser();
-        new android.support.v7.app.AlertDialog.Builder(this)
-                .setTitle("WOOOOOO You got it right")
-                .setMessage(database.getRowsStringUser()).show();
-        new android.support.v7.app.AlertDialog.Builder(this)
-                .setTitle("WOOOOOO You got it right")
-                .setMessage(database.getScoreUser("name")+"").show();
     }
 
     @Override

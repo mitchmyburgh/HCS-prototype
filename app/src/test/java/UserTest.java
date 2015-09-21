@@ -1,5 +1,6 @@
 package com.hcs.prototype.hcs_prototype;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -20,7 +21,8 @@ public class UserTest {
      */
     @Before
     public void setUp(){
-        user = new User();
+        user = new User("username", "password", this);
+        //User.createUser("UN", "pass", null);
     }
 
     /**
@@ -34,10 +36,14 @@ public class UserTest {
     @Test
     public void testLogin() {
         assertEquals(false, user.login()); //because no context
+        //Test the singleton
+        //assertEquals(false, User.getUser().login());
     }
     @Test
     public void testRegister() {
         assertEquals(false, user.register()); //because no context
+        //test the singleton
+        //assertEquals(false, User.getUser().register());
     }
     @Test
     public void testUsername(){
@@ -50,5 +56,11 @@ public class UserTest {
         assertEquals(123, user.getScore());
         user.incScore(123);
         assertEquals(246, user.getScore());
+        //test the singleton
+        /*assertEquals(100, User.getUser().getScore());
+        user.setScore(123);
+        assertEquals(123, User.getUser().getScore());
+        user.incScore(123);
+        assertEquals(246, User.getUser().getScore());*/
     }
 }

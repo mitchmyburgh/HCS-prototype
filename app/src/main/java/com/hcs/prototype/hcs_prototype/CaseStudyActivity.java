@@ -54,6 +54,11 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
      */
     Button[] buts;
 
+    /**
+     * Number of the TextViews and Image views
+     */
+    int numViews = 2;
+
 
     /**
      * Create the activity
@@ -94,12 +99,8 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             buts[i].setTag(sa[1][i]);
         }
         //Hide buttons when there are less than 4 questions
-        for (int i = sa[0].length; i <4; i++){
+        for (int i = sa[0].length; i <4; i++) {
             buts[i].setVisibility(View.GONE);
-        }
-
-        if (cs.isInPicQuestion()){
-
         }
     }
 
@@ -132,7 +133,6 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
             if (cs.getType().equals("LOCAL")){ //get image from assets
                 try {
                     String [] images = cs.getAnswer((String) view.getTag())[2].split(","); // array of image uris
-                    len = images.length;
                     //add each image
                     for (String img : images) {
                         InputStream istr = this.getAssets().open(img.replace("[", "").replace("]", "").replace("\"", "").replace("\\", ""));
@@ -140,10 +140,12 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                         Bitmap b = ((BitmapDrawable)Drawable.createFromStream(istr, null)).getBitmap();
                         Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 300, 300, false); // scale for speed
                         iv.setImageDrawable(new BitmapDrawable(getResources(), bitmapResized));
-                        ll.addView(iv, 2);
+                        ll.addView(iv, numViews);
+                        numViews++;
                     }
                     csDataDisplay = new TextView(this);
-                    ll.addView(csDataDisplay, 2+len);
+                    ll.addView(csDataDisplay, numViews);
+                    numViews++;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -158,10 +160,12 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
                         Bitmap b = ((BitmapDrawable)Drawable.createFromStream(istr, null)).getBitmap();
                         Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 300, 300, false);
                         iv.setImageDrawable(new BitmapDrawable(getResources(), bitmapResized));
-                        ll.addView(iv, 2);
+                        ll.addView(iv, numViews);
+                        numViews++;
                     }
                     csDataDisplay = new TextView(this);
-                    ll.addView(csDataDisplay, 2+len);
+                    ll.addView(csDataDisplay, numViews);
+                    numViews++;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -319,12 +323,6 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
+        //Do nothing on rotate
     }
 }
