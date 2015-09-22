@@ -2,6 +2,7 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.StringTokenizer;
 
@@ -85,6 +86,7 @@ public class User{
         database = new CaseStudyDatabase(context);
         this.password = database.getPassUser(username);
         this.score = database.getScoreUser(username);
+        this.name = database.getNameUser(username);
     }
 
     /**
@@ -98,6 +100,10 @@ public class User{
         this.password = password;
         this.context = context;
         database = new CaseStudyDatabase(context);
+        this.password = database.getPassUser(username);
+        this.score = database.getScoreUser(username);
+        this.name = database.getNameUser(username);
+        Log.v("NAME", this.name);
         //database.getRowsString();
     }
 

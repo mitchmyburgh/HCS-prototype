@@ -119,14 +119,18 @@ public class HistoryActivity extends AppCompatActivity {
                     // Something went wrong!
                     Log.v("INNER", "error");
                 }
-                /*for (int i = 0; i <answers.getJSONObject("answer").length(); i++){
-                    if (!answers.getJSONArray("answer").getString(i).equals("0")){
-                        histDataDisplay.append(Html.fromHtml("<font color='#EE0000'>" + cs.getDiags()[0][Integer.parseInt(answers.getJSONArray("answer").getString(i)) - 1] + ": is wrong</font><br>"));
-                    }
-                }
-                histDataDisplay.append(Html.fromHtml("<b>" + cs.getDiags()[0][0] + "</b><br>"));*/
+
             }
+            Log.v("ANSWER", answers.getJSONArray("answer").toString());
+            for (int i = 0; i <answers.getJSONArray("answer").length(); i++){
+                if (!answers.getJSONArray("answer").getString(i).equals("0")){
+                    Log.v("ANSWER", answers.getJSONArray("answer").getString(i));
+                    histDataDisplay.append(Html.fromHtml("<font color='#EE0000'>" + cs.getDiags()[0][Integer.parseInt(answers.getJSONArray("answer").getString(i))] + ": is wrong</font><br>"));
+                }
+            }
+            histDataDisplay.append(Html.fromHtml("<b>" + cs.getDiags()[0][0] + "</b><br>"));
         } catch (JSONException e){
+            e.printStackTrace();
             Log.v("OUTER", "error");
         }
     }

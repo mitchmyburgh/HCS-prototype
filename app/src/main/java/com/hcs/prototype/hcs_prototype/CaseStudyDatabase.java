@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 30;
+    private static final int DATABASE_VERSION = 35;
     /**
      * The name of the database 
      */
@@ -149,8 +149,8 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         //put some examples in the database
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY1");
-        values.put(KEY_NAME, "name");
-        values.put(KEY_DESC, "desc");
+        values.put(KEY_NAME, "Test1");
+        values.put(KEY_DESC, "Case Study will test your skills to the max");
         values.put(KEY_LOCATION, "CaseStudy01.hson");
         values.put(KEY_TYPE, "LOCAL");
 
@@ -158,10 +158,13 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 CASE_STUDY_TABLE_NAME,
                 "null",
                 values);
+
+
+
         values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY2");
-        values.put(KEY_NAME, "name");
-        values.put(KEY_DESC, "desc");
+        values.put(KEY_NAME, "Test2");
+        values.put(KEY_DESC, "Case Study will test your skills to the max");
         values.put(KEY_LOCATION, "CaseStudy02.hson");
         values.put(KEY_TYPE, "LOCAL");
 
@@ -171,8 +174,8 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 values);
         values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY3");
-        values.put(KEY_NAME, "name");
-        values.put(KEY_DESC, "desc");
+        values.put(KEY_NAME, "Test3");
+        values.put(KEY_DESC, "Case Study will test your skills to the max");
         values.put(KEY_LOCATION, "CaseStudy03.hson");
         values.put(KEY_TYPE, "LOCAL");
 
@@ -183,12 +186,24 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
 
         values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY4");
-        values.put(KEY_NAME, "name");
-        values.put(KEY_DESC, "desc");
+        values.put(KEY_NAME, "Test4");
+        values.put(KEY_DESC, "Case Study will test your skills to the max - note this is on the external storage");
         values.put(KEY_LOCATION, "/storage/emulated/0/CaseStudy05.hson");
         values.put(KEY_TYPE, "DISK");
 
         db.insert(
+                CASE_STUDY_TABLE_NAME,
+                "null",
+                values);
+
+        values = new ContentValues();
+        values.put(KEY_CASE_ID, "CASESTUDY5");
+        values.put(KEY_NAME, "Test5");
+        values.put(KEY_DESC, "Case Study will test your skills to the max");
+        values.put(KEY_LOCATION, "CaseStudy05.hson");
+        values.put(KEY_TYPE, "LOCAL");
+
+        newRowId = db.insert(
                 CASE_STUDY_TABLE_NAME,
                 "null",
                 values);

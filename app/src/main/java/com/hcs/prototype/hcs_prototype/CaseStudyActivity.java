@@ -271,7 +271,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("You got it wrong")
-                    .setMessage("You Are Wrong").setPositiveButton("OK",
+                    .setMessage(((Button) v).getText() + ": is wrong").setPositiveButton("OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
