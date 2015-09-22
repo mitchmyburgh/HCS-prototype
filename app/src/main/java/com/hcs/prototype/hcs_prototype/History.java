@@ -48,6 +48,7 @@ public class History {
         hist = new JSONObject();
 
         try {
+            hist.put("questions", new JSONObject());
             hist.put("answer", new JSONArray());
             hist.put("score", 100);
         } catch (JSONException e) {
@@ -81,6 +82,7 @@ public class History {
         hist = new JSONObject();
 
         try {
+            hist.put("questions", new JSONObject());
             hist.put("answer", new JSONArray());
             hist.put("score", 100);
         } catch (JSONException e) {
@@ -97,7 +99,7 @@ public class History {
             return false;
         }
         try {
-            hist.put(key, new JSONArray());
+            hist.getJSONObject("questions").put(key, new JSONArray());
             return true;
         } catch (JSONException e) {
             return false;
@@ -112,7 +114,7 @@ public class History {
      */
     public boolean addImageAnswer(String key, String ans, boolean right){
         try {
-            hist.getJSONArray(key).put(ans);
+            hist.getJSONObject("questions").getJSONArray(key).put(ans);
             if (!right){
                 hist.put("score", hist.getInt("score")-5);
             }
@@ -157,7 +159,11 @@ public class History {
      * @return boolean indicates if the key is in the history
      */
     public boolean inHist(String key){
-        return hist.has(key);
+        try {
+            return hist.getJSONObject("questions").has(key);
+        } catch (JSONException e){
+            return false;
+        }
     }
 
     /**
@@ -166,7 +172,11 @@ public class History {
      */
     public int length(){
         Log.v("LENGTH", (hist.length()-2)+"");
-        return hist.length()-2;
+        try {
+            return hist.getJSONObject("questions").length();
+        } catch (JSONException e){
+            return 0;
+        }
     }
 
     public boolean save(){
@@ -179,6 +189,14 @@ public class History {
 
     public String toString(Context context){
         return ((CaseStudy)(new CaseStudyDatabase(context)).getCaseStudy(this.CSPK)).getJSONName()+" SCORE: "+this.getScore();
+    }
+
+    public CaseStudy getCaseStudy(Context context){
+        return ((CaseStudy)(new CaseStudyDatabase(context)).getCaseStudy(this.CSPK));
+    }
+
+    public JSONObject getHist(){
+        return this.hist;
     }
 
 }

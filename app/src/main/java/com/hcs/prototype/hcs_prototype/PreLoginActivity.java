@@ -1,6 +1,7 @@
 package com.hcs.prototype.hcs_prototype;
 
 import android.app.Activity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,9 @@ public class PreLoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+        /*new AlertDialog.Builder(this)
+                .setTitle("You got it wrong")
+                .setMessage((new CaseStudyDatabase(this).getRowsStringUser())).show();*/
     }
 
     @Override

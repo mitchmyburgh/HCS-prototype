@@ -271,14 +271,19 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("You got it wrong")
-                    .setMessage("You Are Wrong").show();
+                    .setMessage("You Are Wrong").setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    }).show();
             csDataDisplay.append(Html.fromHtml("<font color='#EE0000'>" + ((Button) v).getText() + ": is wrong</font><br>"));
         }
     }
 
     /**
      * Implementing Fisher–Yates shuffle
-     * @param ar The arrsy to be shuffled
+     * @param ar The array to be shuffled
      * @return teh shuffled array
      */
     static Button[] shuffleArray(Button[] ar)
@@ -324,4 +329,5 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
         super.onConfigurationChanged(newConfig);
         //Do nothing on rotate
     }
+
 }

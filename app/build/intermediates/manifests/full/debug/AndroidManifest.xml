@@ -78,6 +78,10 @@
             android:name="com.hcs.prototype.hcs_prototype.FinishCSActivity"
             android:label="@string/title_activity_finish_cs" >
         </activity>
+        <activity
+            android:name="com.hcs.prototype.hcs_prototype.HistoryActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

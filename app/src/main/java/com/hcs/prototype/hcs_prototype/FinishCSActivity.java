@@ -31,6 +31,7 @@ public class FinishCSActivity extends AppCompatActivity {
     // do something when the button is clicked
         //Intent intent = new Intent(this, MainActivity.class);
         //startActivity(intent);
+        CaseStudy.clearCS();
         finish();
     }
     /**

@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 25;
+    private static final int DATABASE_VERSION = 30;
     /**
      * The name of the database 
      */
@@ -62,7 +62,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * The username column header.
      */
-    private static final String KEY_UN  = "username";
+    private static final String KEY_UN  = "staff_number";
     /**
      * The password column header
      */
@@ -71,6 +71,14 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      * The score column header
      */
     private static final String KEY_SCORE = "Score";
+    /**
+     * The username column header.
+     */
+    private static final String KEY_STAFF_NAME  = "name";
+    /**
+     * The username column header.
+     */
+    private static final String KEY_NUMBER  = "number";
 
     private static final String HIST_TABLE_NAME = "history";
     private static final String HIST_KEY = "hist";
@@ -87,7 +95,9 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                     KEY_ID_USER + " INTEGER PRIMARY KEY, " +
                     KEY_UN + " TEXT UNIQUE, " +
                     KEY_PASS + " TEXT, " +
-                    KEY_SCORE + " INTEGER);";
+                    KEY_SCORE + " INTEGER, " +
+                    KEY_STAFF_NAME+" TEXT, "+
+                    KEY_NUMBER+" TEXT);";
     /**
      * The String for creating the table
      */
@@ -129,9 +139,13 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.v("DATABASE", "onCREATE");
         //Create Databases
-        db.execSQL(CASE_STUDY_TABLE_CREATE);
-        db.execSQL(USER_TABLE_CREATE);
-        db.execSQL(HIST_TABLE_CREATE);
+        try {
+            db.execSQL(CASE_STUDY_TABLE_CREATE);
+            db.execSQL(USER_TABLE_CREATE);
+            db.execSQL(HIST_TABLE_CREATE);
+        } catch (android.database.sqlite.SQLiteException e){
+
+        }
         //put some examples in the database
         ContentValues values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY1");
@@ -183,6 +197,9 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         values.put(KEY_UN, "test");
         values.put(KEY_PASS, "test");
         values.put(KEY_SCORE, 123);
+        values.put(KEY_STAFF_NAME, "BOB");
+        values.put(KEY_NUMBER, "1234567890");
+        Log.v("STUFF", USER_TABLE_CREATE);
 
         db.insert(
                 USER_TABLE_NAME,
@@ -315,7 +332,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      * @param score the score
      * @return long the row id
      */
-    public long writeRowUser(String name, String pass, int score){
+    public long writeRowUser(String name, String pass, int score, String staff_name, String number){
         // Gets the data repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         // Create a new map of values, where column names are the keys
@@ -323,6 +340,8 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         values.put(KEY_UN, name);
         values.put(KEY_PASS, pass);
         values.put(KEY_SCORE, score);
+        values.put(KEY_STAFF_NAME, staff_name);
+        values.put(KEY_NUMBER, number);
 
         long newRowId = db.insert(
                 USER_TABLE_NAME,
@@ -347,7 +366,9 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 ls += cursor.getInt(0)+" ";
                 ls += (cursor.getString(1))+" ";
                 ls += (cursor.getString(2))+" ";
-                ls += (cursor.getInt(3))+"\n";
+                ls += (cursor.getString(3))+" ";
+                ls += (cursor.getString(4))+" ";
+                ls += (cursor.getInt(5))+"\n";
 
             } while (cursor.moveToNext());
         }
@@ -391,7 +412,6 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
         Cursor cursor = db.rawQuery(query, null);
-        CaseStudy cs = null;
         if (cursor.moveToFirst()) {
             db.close();
             return cursor.getInt(3);
@@ -421,6 +441,44 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     }
 
     /**
+     * Get the user's name
+     * @param uname the user's username (Staff Number)
+     * @return String the user's name
+     */
+    public String getNameUser(String uname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            db.close();
+            return cursor.getString(4);
+        } else {
+            db.close();
+            return "false"; //user not in the database
+        }
+    }
+
+    /**
+     * Get the user's telephone number
+     * @param uname the user's username
+     * @return String the user's telephone number
+     */
+    public String getTelUser(String uname){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        CaseStudy cs = null;
+        if (cursor.moveToFirst()) {
+            db.close();
+            return cursor.getString(5);
+        } else {
+            db.close();
+            return "false"; //user not in the database
+        }
+    }
+
+    /**
      * Increment the user's score by n
      * @param uname the user's username
      * @param n the number to increment the score by
@@ -436,7 +494,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         CaseStudy cs = null;
         if (cursor.moveToFirst()) {
             values.put(KEY_SCORE, n+cursor.getInt(3));
-            db.update(USER_TABLE_NAME, values, "username=?", new String[] {uname});
+            db.update(USER_TABLE_NAME, values, KEY_UN+"=?", new String[] {uname});
             db.close();
             return true;
         } else {

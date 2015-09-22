@@ -24,6 +24,21 @@
                 android:singleLine="true"
                 android:imeOptions = "actionNext"/>
 
+            <EditText android:id="@+id/name" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:hint="@string/prompt_name"
+                android:imeActionId="@+id/name"
+                android:imeActionLabel="@string/action_register"
+                android:inputType="text"
+                android:maxLines="1" android:singleLine="true"
+                android:imeOptions = "actionNext"/>
+            <EditText android:id="@+id/tel_num" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:hint="@string/prompt_phone"
+                android:imeActionId="@+id/tel_num"
+                android:imeActionLabel="@string/action_register"
+                android:inputType="text"
+                android:maxLines="1" android:singleLine="true"
+                android:imeOptions = "actionNext"/>
+
             <EditText android:id="@+id/password" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="@string/prompt_password"
                 android:imeActionId="@+id/login"
@@ -31,6 +46,7 @@
                 android:imeOptions="actionUnspecified" android:inputType="textPassword"
                 android:maxLines="1" android:singleLine="true"
                 android:nextFocusForward="@+id/email_sign_in_button"/>
+
 
             <Button android:id="@+id/email_sign_in_button" style="?android:textAppearanceSmall"
                 android:layout_width="match_parent" android:layout_height="wrap_content"

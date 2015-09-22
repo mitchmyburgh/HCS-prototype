@@ -95,6 +95,9 @@ public class RegisterActivity extends ActionBarActivity {
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+        String name = ((TextView)findViewById(R.id.name)).getText().toString();
+        String number = ((TextView)findViewById(R.id.tel_num)).getText().toString();
+
         boolean cancel = false;
         View focusView = null;
 
@@ -131,6 +134,8 @@ public class RegisterActivity extends ActionBarActivity {
             //mAuthTask = new UserLoginTask(email, password);
             //mAuthTask.execute((Void) null);
             UserNormal.createUser(email, password, this);
+            UserNormal.getUser().setName(name);
+            UserNormal.getUser().setPhone(number);
             //user.register();
             if (UserNormal.getUser().register()){
                 Intent intent = new Intent(this, MainActivity.class);

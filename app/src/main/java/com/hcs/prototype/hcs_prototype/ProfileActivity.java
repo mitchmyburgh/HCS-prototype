@@ -1,5 +1,6 @@
 package com.hcs.prototype.hcs_prototype;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +19,16 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    List<History> hl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         TextView scoreDisplay = (TextView)findViewById(R.id.score_display);
-        scoreDisplay.setText(User.getUser().getUsername() + "\n" + User.getUser().getScore());
+        scoreDisplay.setText("STAFF NUMBER: "+User.getUser().getUsername() + "\nSCORE: " + User.getUser().getScore()+"\nNAME:"+User.getUser().getName()+"\nTEL:"+User.getUser().getTel());
         ListView listview = (ListView) findViewById(R.id.hist_listview);
-        List<History> hl = (new CaseStudyDatabase(this)).getMyHist(User.getUser().getUsername());
+        hl = (new CaseStudyDatabase(this)).getMyHist(User.getUser().getUsername());
         final ArrayList<String> list = new ArrayList<String>();
         for (History hist : hl){
             list.add(hist.toString(this));
@@ -39,9 +42,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view,
                                     int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
-                /*new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(position+"")
-                        .setMessage(csl.get(position).getId()).show();*/
+                Intent intent = new Intent(ProfileActivity.this, HistoryActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("ID", position);
+                intent.putExtras(b);
+                startActivity(intent);
 
                 //view.animate().setDuration(2000).alpha(0);
 
@@ -50,27 +55,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

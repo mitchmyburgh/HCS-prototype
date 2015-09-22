@@ -3,6 +3,8 @@ package com.hcs.prototype.hcs_prototype;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.StringTokenizer;
+
 /**
  * <h1>User Class Singleton</h1>
  * The user class implements authenticated login and register for users.
@@ -50,7 +52,18 @@ public class User{
      * The user's current score
      */
     private int score = 0;
+    /**
+     * The case study database
+     */
     private CaseStudyDatabase database = null;
+    /**
+     * The users name
+     */
+    private String name = "No Name";
+    /**
+     * the users telephoen number
+     */
+    private String tel = "083 555 6666";
     /**
      * Create a new user object
      */
@@ -143,6 +156,8 @@ public class User{
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
                 score = database.getScoreUser(username);
+                tel = database.getTelUser(username);
+                name = database.getNameUser(username);
                 return 1;
             } else {
                 currentUser = false;
@@ -161,7 +176,7 @@ public class User{
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
             if (database.checkPassUser(username, password) == -1) { //not in database
-                database.writeRowUser(username, password, 0);
+                database.writeRowUser(username, password, 0, this.name, this.tel);
                 score = database.getScoreUser(username);
                 usersEdit.putString("current_user", username);
                 usersEdit.commit();
@@ -253,5 +268,28 @@ public class User{
         } else {
             return false;
         }
+    }
+
+    /**
+     * Set teh user's phone number
+     * @param num The user's phone number
+     */
+    public void setPhone(String num){
+        this.tel = num;
+    }
+
+    /**
+     * Set the user's name
+     * @param name The user's name
+     */
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getTel(){
+        return this.tel;
+    }
+    public String getName(){
+        return this.name;
     }
 }

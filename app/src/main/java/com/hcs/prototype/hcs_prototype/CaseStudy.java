@@ -565,4 +565,16 @@ public class CaseStudy {
             return new JSONArray();
         }
     }
+
+    /**
+     * Get all the questions for the history summary
+     * @return JSONArray containing all the questions
+     */
+    public JSONArray getAllQs(){
+        try {
+            return JSONobj.getJSONObject("casestudy").getJSONArray("questions");
+        } catch (JSONException e){
+            return new JSONArray();
+        }
+    }
 }
