@@ -100,7 +100,7 @@ public class User{
         this.password = password;
         this.context = context;
         database = new CaseStudyDatabase(context);
-        this.password = database.getPassUser(username);
+        //this.password = database.getPassUser(username);
         this.score = database.getScoreUser(username);
         this.name = database.getNameUser(username);
         Log.v("NAME", this.name);
@@ -153,7 +153,7 @@ public class User{
         if (context != null) {
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
-
+            Log.v("PASS2", password);
             if (database.checkPassUser(username, password) == -1) {
                 currentUser = false;
                 return -1;

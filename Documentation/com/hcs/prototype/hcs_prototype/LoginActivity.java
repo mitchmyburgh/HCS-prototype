@@ -146,6 +146,10 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
+        } else if (TextUtils.isEmpty(password)){
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
         }
 
         if (cancel) {
@@ -153,17 +157,26 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
 
             UserNormal.createUser(email, password, this);
-            //Log.v("USER", user.login()+"");
-            if (UserNormal.getUser().login()){
+            Log.v("USER", password + "");
+            if (UserNormal.getUser().login() == 1){
                 Intent intent = new Intent(this, MainActivity.class);
                 //Bundle b = new Bundle();
                 //b.putParcelable("USER", user);
                 //intent.putExtras(b);
                 startActivity(intent);
+                finish();
+            } else if (UserNormal.getUser().login() == 0){
+                mPasswordView.setError(getString(R.string.error_invalid_password));
+                focusView = mPasswordView;
+                cancel = true;
+                focusView.requestFocus();
+            } else {
+                mEmailView.setError(getString(R.string.error_user_not_found));
+                focusView = mEmailView;
+                cancel = true;
+                focusView.requestFocus();
             }
 
         }

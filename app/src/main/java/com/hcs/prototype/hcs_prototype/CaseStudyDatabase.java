@@ -387,11 +387,13 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      * @return int (-1,0,1) = (user not in the databse, password incorrect, password correct)
      */
     public int checkPassUser(String uname, String pass){
+        Log.v("PASS", pass);
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + USER_TABLE_NAME+" WHERE "+KEY_UN+" = '"+uname+"'";
         Cursor cursor = db.rawQuery(query, null);
-        CaseStudy cs = null;
+
         if (cursor.moveToFirst()) {
+            Log.v("PASS", pass+" "+cursor.getString(2));
             if (cursor.getString(2).equals(pass)){
                 db.close();
                 return 1; //password is found in the databse

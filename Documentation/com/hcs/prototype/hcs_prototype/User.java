@@ -2,8 +2,9 @@ package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.util.Log;
+
+import java.util.StringTokenizer;
 
 /**
  * <h1>User Class Singleton</h1>
@@ -51,7 +52,19 @@ public class User{
      * <h2>int score</h2>
      * The user's current score
      */
-    private int score = 100;
+    private int score = 0;
+    /**
+     * The case study database
+     */
+    private CaseStudyDatabase database = null;
+    /**
+     * The users name
+     */
+    private String name = "No Name";
+    /**
+     * the users telephoen number
+     */
+    private String tel = "083 555 6666";
     /**
      * Create a new user object
      */
@@ -60,6 +73,22 @@ public class User{
         this.password = "password";
         this.context = null;
     }
+
+    /**
+     * Create a new user object
+     * @param username the user's username
+     * @param context the context which the data will be obtained from
+     */
+    User(String username, Context context){
+        this.username = username;
+        //this.password = password;
+        this.context = context;
+        database = new CaseStudyDatabase(context);
+        this.password = database.getPassUser(username);
+        this.score = database.getScoreUser(username);
+        this.name = database.getNameUser(username);
+    }
+
     /**
     * Create a new user object
     * @param username the user's username
@@ -70,10 +99,16 @@ public class User{
         this.username = username;
         this.password = password;
         this.context = context;
+        database = new CaseStudyDatabase(context);
+        //this.password = database.getPassUser(username);
+        this.score = database.getScoreUser(username);
+        this.name = database.getNameUser(username);
+        Log.v("NAME", this.name);
+        //database.getRowsString();
     }
 
     /**
-     * creates a user object within the singleton, else writes ove the object
+     * creates a user object within the singleton, else writes over the object
      * @param username the username of the user
      * @param password the password of the user
      * @param context the context for pref file access
@@ -83,6 +118,19 @@ public class User{
     public static User createUser(String username, String password, Context context){
         user = null; //reset user object
         user = new User(username, password, context);
+        return user;
+    }
+
+    /**
+     * creates a user object within the singleton, else writes over the object
+     * @param username the username of the user
+     * @param context the context for pref file access
+     * @return user singleton
+     *
+     */
+    public static User createUser(String username, Context context){
+        user = null; //reset user object
+        user = new User(username, context);
         return user;
     }
 
@@ -101,21 +149,28 @@ public class User{
      * Login the current user
      * @return boolean whether the user is logged in
      */
-    public boolean login() {
+    public int login() {
         if (context != null) {
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
-            if (users.getString(username, "no_name").equals("no_name")) {
+            SharedPreferences.Editor usersEdit = users.edit();
+            Log.v("PASS2", password);
+            if (database.checkPassUser(username, password) == -1) {
                 currentUser = false;
-                return currentUser;
-            } else if (users.getString(username, "no_name").equals(password)) {
+                return -1;
+            } else if (database.checkPassUser(username, password) == 1) {
                 currentUser = true;
-                return currentUser;
+                usersEdit.putString("current_user", username);
+                usersEdit.commit();
+                score = database.getScoreUser(username);
+                tel = database.getTelUser(username);
+                name = database.getNameUser(username);
+                return 1;
             } else {
                 currentUser = false;
-                return currentUser;
+                return 0;
             }
         } else {
-            return currentUser;
+            return -2;
         }
     }
     /**
@@ -126,8 +181,10 @@ public class User{
         if (context != null){
             SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
             SharedPreferences.Editor usersEdit = users.edit();
-            if (users.getString(username, "no_name") == "no_name") {
-                usersEdit.putString(username, password);
+            if (database.checkPassUser(username, password) == -1) { //not in database
+                database.writeRowUser(username, password, 0, this.name, this.tel);
+                score = database.getScoreUser(username);
+                usersEdit.putString("current_user", username);
                 usersEdit.commit();
                 currentUser = true;
                 return currentUser;
@@ -179,6 +236,66 @@ public class User{
      */
     public int incScore(int score){
         this.score += score;
+        database.incScoreUser(username, score);
         return this.score;
+    }
+
+    /**
+     * Get the currently logged in user (for reopening the app at later time)
+     * @param context The context for accessing the preferences file
+     * @return boolean whether there is a currently logged in user
+     */
+    public static boolean getCurrentUser(Context context){
+        if (context != null) {
+            SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
+            if (users.getString("current_user", "no_name").equals("no_name")) {
+                return false;
+            } else  {
+                User.createUser(users.getString("current_user", "no_name"), context);
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Logout the user
+     * @return boolean if the user is logged out
+     */
+    public boolean logout(){
+        if (this.context != null){
+            SharedPreferences users = context.getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor usersEdit = users.edit();
+            usersEdit.putString("current_user", "no_name");
+            usersEdit.commit();
+            user = null;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Set teh user's phone number
+     * @param num The user's phone number
+     */
+    public void setPhone(String num){
+        this.tel = num;
+    }
+
+    /**
+     * Set the user's name
+     * @param name The user's name
+     */
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getTel(){
+        return this.tel;
+    }
+    public String getName(){
+        return this.name;
     }
 }

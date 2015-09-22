@@ -1,6 +1,7 @@
 package com.hcs.prototype.hcs_prototype;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,13 +14,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
+    /**
+     * List of Case Studies
+     */
     List<CaseStudy> csl;
+    /**
+     * The List View containing the case studies
+     */
+    ListView listview;
     /**
      * Creates the activity
      * @param savedInstanceState the previous saved instance
@@ -28,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreLoginActivity.getAct().finish();
         CaseStudy.createDatabase(this);
         TextView scoreDisplay = (TextView)findViewById(R.id.ls_display);
         scoreDisplay.setText("");
@@ -41,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //scoreDisplay.append(CaseStudy.getAllCaseString());
         csl = CaseStudy.getAllCaseStudy();
 
-        final ListView listview = (ListView) findViewById(R.id.cs_listview);
+        listview = (ListView) findViewById(R.id.cs_listview);
         /*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
                 "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
@@ -49,32 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 "Android", "iPhone", "WindowsMobile" };
 
         */
-        final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < csl.size(); ++i) {
-            list.add(csl.get(i).toString());
-        }
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,
-                android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(adapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.drawCSList();
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id) {
-                final String item = (String) parent.getItemAtPosition(position);
-                /*new AlertDialog.Builder(MainActivity.this)
-                        .setTitle(position+"")
-                        .setMessage(csl.get(position).getId()).show();*/
-                Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
-                Bundle b = new Bundle();
-                b.putInt("ID", csl.get(position).getPrimaryKey());
-                intent.putExtras(b);
-                startActivity(intent);
-                //view.animate().setDuration(2000).alpha(0);
-
-            }
-
-        });
     }
 
     /**
@@ -113,13 +100,99 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.action_addcs) {
-            Intent intent = new Intent(this, AddCSActivity.class);
-            startActivity(intent);
+            //String m_chosen;
+            //Intent intent = new Intent(this, AddCSActivity.class);
+            //startActivity(intent);
+            //code taken from http://www.scorchworks.com/Blog/simple-file-dialog-for-android-applications/
+            SimpleFileDialog FileOpenDialog = new SimpleFileDialog(MainActivity.this, "FileOpen", new SimpleFileDialog.SimpleFileDialogListener() {
+                @Override
+                public void onChosenDir(String chosenDir) { // The code in this function will be executed when the dialog OK button is pushed
+                    String m_chosen = chosenDir;
+                    //Pattern p = Pattern.compile(".*\\.hson");
+                    if (Pattern.matches(".*\\.hson", m_chosen)){
+                        Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " + m_chosen, Toast.LENGTH_LONG).show();
+                        CaseStudy cs = new CaseStudy(m_chosen, MainActivity.this);
+                        if (cs.getPrimaryKey() != -1) {
+                            csl.add(CaseStudy.getCaseStudy(cs.getPrimaryKey(), MainActivity.this));
+                        }
+                        drawCSList();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Incorrect File Type: " + m_chosen, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }); //You can change the default filename using the public variable "Default_File_Name"
+              FileOpenDialog.Default_File_Name = ""; FileOpenDialog.chooseFile_or_Dir(); ///////////////////////////////////////////////////////////////////////////////////////////////// - See more at: http://www.scorchworks.com/Blog/simple-file-dialog-for-android-applications/#sthash.RN6X6Tku.dpuf
+            return true;
+        }
+        if (id == R.id.action_logout) {
+            if (User.getUser().logout()) {
+                Intent intent = new Intent(this, PreLoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void drawCSList(){
+        final ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0; i < csl.size(); ++i) {
+            list.add(csl.get(i).toString());
+        }
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_1, list);
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view,
+                                    int position, long id) {
+                final String item = (String) parent.getItemAtPosition(position);
+                /*new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(position+"")
+                        .setMessage(csl.get(position).getId()).show();*/
+                Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
+                Bundle b = new Bundle();
+                b.putLong("ID", csl.get(position).getPrimaryKey());
+                intent.putExtras(b);
+                startActivity(intent);
+                //view.animate().setDuration(2000).alpha(0);
+
+            }
+
+        });
+    }
+
+    /**
+     * Handle back button pressed
+     */
+    /*@Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Exit Case Study?")
+                .setMessage("Your Progress will not be saved").setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        CaseStudy.clearCS();
+                        finish();
+                    }
+                }).setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to invoke NO event
+                        dialog.cancel();
+                    }
+                }).show();
+        //finish();
+        return;
+    }*/
+
+    /**
+     * Array Adapter for printing the List of Case studies
+     */
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
@@ -144,5 +217,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

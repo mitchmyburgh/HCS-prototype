@@ -159,7 +159,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         } else {
 
             UserNormal.createUser(email, password, this);
-            //Log.v("USER", user.login()+"");
+            Log.v("USER", password + "");
             if (UserNormal.getUser().login() == 1){
                 Intent intent = new Intent(this, MainActivity.class);
                 //Bundle b = new Bundle();
