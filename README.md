@@ -4,6 +4,8 @@
 
 Make sure that JAVA_HOME and ANDROID_HOME is set in your Path
 
+You require Android SDK version 22 to compile
+
 Then run the following commands from the root of the Project folder
 ```
 chmod +x gradlew

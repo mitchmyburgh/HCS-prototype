@@ -68,7 +68,7 @@ public class CaseStudyActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_case_study);
-        int id = getIntent().getExtras().getInt("ID");//CS id
+        long id = getIntent().getExtras().getLong("ID");//CS id
         //create the case study
         if (CaseStudy.getCS() != null){
             cs = CaseStudy.getCS();

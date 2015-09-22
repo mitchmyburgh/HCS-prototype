@@ -184,17 +184,6 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 "null",
                 values);
 
-        values = new ContentValues();
-        values.put(KEY_CASE_ID, "CASESTUDY4");
-        values.put(KEY_NAME, "Test4");
-        values.put(KEY_DESC, "Case Study will test your skills to the max - note this is on the external storage");
-        values.put(KEY_LOCATION, "/storage/emulated/0/CaseStudy05.hson");
-        values.put(KEY_TYPE, "DISK");
-
-        db.insert(
-                CASE_STUDY_TABLE_NAME,
-                "null",
-                values);
 
         values = new ContentValues();
         values.put(KEY_CASE_ID, "CASESTUDY5");
@@ -329,7 +318,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
      * @param pk the primary key of the case study in the database
      * @return CaseStudy the Case study referenced in the database
      */
-    public CaseStudy getCaseStudy(int pk){
+    public CaseStudy getCaseStudy(long pk){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT  * FROM " + CASE_STUDY_TABLE_NAME+" WHERE "+KEY_ID+" = "+pk;
         Cursor cursor = db.rawQuery(query, null);

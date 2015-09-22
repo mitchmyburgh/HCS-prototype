@@ -35,7 +35,7 @@ public class CaseStudy {
     /**
      * The primary key of teh case study in the database
      */
-    private int PRIMARY_KEY;
+    private long PRIMARY_KEY;
     /**
      * The id of the Case Study, this must be unique and produced by the case study creator //TODO: generator code? 
      */
@@ -100,7 +100,7 @@ public class CaseStudy {
         this.context = context;
         this.type = "DISK";
         this.cacheJSON();
-        CaseStudy.addCaseStudy(this.id, this.getJSONName(), this.getJSONDesc(), loc, this.type);
+        this.PRIMARY_KEY = CaseStudy.addCaseStudy(this.id, this.getJSONName(), this.getJSONDesc(), loc, this.type);
         //this.load(); //load data from the database
     }
 
@@ -145,7 +145,7 @@ public class CaseStudy {
      * Returns the case study's key in the database
      * @return int this.PRIMARY_KEY the primary key of the case study in the database
      */
-    public int getPrimaryKey(){
+    public long getPrimaryKey(){
         return this.PRIMARY_KEY;    
     }
     /**
@@ -198,7 +198,7 @@ public class CaseStudy {
      * Load the case study data from the database
      * @return boolean indicates whether the load was succesful
      */
-    public static CaseStudy getCaseStudy(int pk, Context context){
+    public static CaseStudy getCaseStudy(long pk, Context context){
         database = new CaseStudyDatabase(context);
         if (database == null){
             cs_ = new CaseStudy();

@@ -112,7 +112,9 @@ public class MainActivity extends AppCompatActivity {
                     if (Pattern.matches(".*\\.hson", m_chosen)){
                         Toast.makeText(MainActivity.this, "Chosen FileOpenDialog File: " + m_chosen, Toast.LENGTH_LONG).show();
                         CaseStudy cs = new CaseStudy(m_chosen, MainActivity.this);
-                        csl.add(cs);
+                        if (cs.getPrimaryKey() != -1) {
+                            csl.add(CaseStudy.getCaseStudy(cs.getPrimaryKey(), MainActivity.this));
+                        }
                         drawCSList();
                     } else {
                         Toast.makeText(MainActivity.this, "Incorrect File Type: " + m_chosen, Toast.LENGTH_LONG).show();
@@ -153,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(csl.get(position).getId()).show();*/
                 Intent intent = new Intent(MainActivity.this, CaseStudyActivity.class);
                 Bundle b = new Bundle();
-                b.putInt("ID", csl.get(position).getPrimaryKey());
+                b.putLong("ID", csl.get(position).getPrimaryKey());
                 intent.putExtras(b);
                 startActivity(intent);
                 //view.animate().setDuration(2000).alpha(0);
