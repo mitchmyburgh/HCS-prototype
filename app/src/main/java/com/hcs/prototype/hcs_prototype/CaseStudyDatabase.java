@@ -18,7 +18,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
     /**
      * Current version of the database, android uses this to indicate when to call onUpgrade
      */
-    private static final int DATABASE_VERSION = 36;
+    private static final int DATABASE_VERSION = 37;
     /**
      * The name of the database 
      */
@@ -201,7 +201,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         values.put(KEY_CASE_ID, "CS1");
         values.put(KEY_NAME, "Example");
         values.put(KEY_DESC, "old man");
-        values.put(KEY_LOCATION, "examples.hson");
+        values.put(KEY_LOCATION, "example.hson");
         values.put(KEY_TYPE, "LOCAL");
 
         newRowId = db.insert(
