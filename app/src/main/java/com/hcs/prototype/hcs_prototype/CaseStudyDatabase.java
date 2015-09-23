@@ -197,17 +197,6 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
                 "null",
                 values);
 
-        values = new ContentValues();
-        values.put(KEY_CASE_ID, "CS1");
-        values.put(KEY_NAME, "Example");
-        values.put(KEY_DESC, "old man");
-        values.put(KEY_LOCATION, "example.hson");
-        values.put(KEY_TYPE, "LOCAL");
-
-        newRowId = db.insert(
-                CASE_STUDY_TABLE_NAME,
-                "null",
-                values);
         //Put Example User
         values = new ContentValues();
         values.put(KEY_UN, "test");
