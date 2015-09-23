@@ -1,0 +1,79 @@
+{
+	"CASESTUDY2":{
+		"metadata":{
+			"name": "Test1", "description": "Case Study will test your skills to the max"		
+		},
+		"casestudy":{
+			"start": "A 55 year-old man presents to the emergency room at Presbyterian University Hospital with a chief complaint of \"I have a severe headache and fever\".",
+			"questions":[{
+				"type": "text",
+				"question": "Look Up Past Medical History",
+				"answer": "1. Bursitis of Left shoulder for one year treated by hydrocortisone injections, once every three months by an outside physician prior to presentation.\n2. Orthotopic Liver Transplant in 1992 for cirrhosis secondary to alcohol use.\n3. Cadaveric Renal Transplant in 1994 for chronic renal failure secondary to glomerulonephritis.\n4. Hypertension."
+			},
+			{
+				"type": "text",
+				"question": "Look Up Past Medical Tests",
+				"answer": " lumbar puncture was performed showing 169.7 mg/dl of protein, 38 mg/dl of glucose, and 1,464 white cells/ mm3. The cerebrospinal spinal fluid differential was noted for 100 neutrophils but no bacteria. Cryptococcal Antigen testing performed on cerebrospinal fluid resulted in a titer of 1:256."
+			},
+{
+				"type": "text",
+				"question": "Past Medical Treatment",
+				"answer": "Started on multiple antibiotics and transferred to Presbyterian University Hospital for further medical management."
+			},
+{
+				"type": "text",
+				"question": "Recent History",
+				"answer": "The patient had been seen one week prior to presentation by his local physician with the complaints of headache and low grade fever. Two days prior to presentation at Presbyterian University Hospital he was seen in the emergency room at an outside hospital complaining of worsening of his headache and fever. "
+			},
+{
+				"type": "text",
+				"question": "Physical State",
+				"answer": "Tired, middle aged, man in no apparent distress."
+			},
+{
+				"type": "text",
+				"question": "You notice his shoulder is hurting, ask about it",
+				"answer": "His left shoulder was tender to palpation and movement."
+			},
+{
+				"type": "text",
+				"question": "Check Temperature",
+				"answer": "38.5"
+			},
+			{
+				"type": "img",
+				"question": "can i see your xray?",
+				"answer": {
+					"desc": "Here is an x-ray",
+					"img": ["img/gross3.png"]
+				},
+				"quiz": "Which is correct?",
+				"quiz_answer": "Chest x-ray showed cardiac enlargement, no acute pulmonary abnormality, and a lytic lesion of the distal left clavicle.",
+				"quiz_possible": ["There is nothing wrong", "You have globules in your lungs"]			
+			},
+{
+				"type": "img",
+				"question": "Can I scan your shoulder?",
+				"answer": {
+					"desc": "You scan the schoulder and see: ",
+					"img": ["img/gross3.png", "img/gross4.png"]
+				},
+				"quiz": "Which is correct?",
+				"quiz_answer": "CT scan of the shoulder (bone window, soft tissue window) showed probable abscess anterior and subjacent to the distal left clavicle with lytic destruction of the adjacent clavicle.",
+				"quiz_possible": ["There is nothing wrong", "You have nodes you will never sing again"]			
+			},
+			
+			{
+				"type": "text",
+				"question": "What is your name?",
+				"answer": "my name is bob"
+			}
+			],
+			"diagnosis":{
+				"correct": "TB",
+				"possible":["AIDS", "CANCER", "DISEASE", "ANOTHER DISEASE", "ONE MORE DISEASE"]
+			}
+		},
+		"tips": ["Best to first ask history", "then explore the history", "other tips", "this is freeform and the creator can write whatever here"]
+	}
+}

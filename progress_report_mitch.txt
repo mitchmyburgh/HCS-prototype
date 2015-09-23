@@ -1,0 +1,36 @@
+Progress Report Mitch Myburgh (MYBMIT001)
+17 August 2015
+31 July 2015 - 17 August 2015
+
+Health Case Studies (Brian DeRenzi)
+
+Team Members: Mbongeni Ncube, Aziza Makiwane
+
+1.1 Task Activities
+
+During this period the prototype was worked on. The following features were added:
+	1. Login/Register Screen and User Class
+		The login and register screens were added with a User class (extended by UserNormal and UserAdmin) that authorises the user from the preferences store. The User class is a singleton for ease of access between different Activities and also stores the users score and various other details. This implements the Login case study.
+	2. CaseStudy and CaseStudyDatabase Classes
+		These classes allow the program to interact with the Case studies and their representation in the database. The databse stores metatdata and teh location of the .json file of the case study. The CaseStudy class allows the user to read case study data. This is a helper class for the implementation of the Case study walkthrough use case.
+	3. Case Study List Activity
+		This activity lists the case studies available in the database, the case studies are loaded from the apk as well as an arbitrry location on the disk. This implements the Case Study list use case.
+	4. History Class
+		This class stores the progress through a specific walkthrough of a case study and is a helper class for the implementation of the Case Study Walkthrough use case.
+	5. The Case Study Activity
+		This activity allows the user to walkthrough the case study and peform a diagnosis. 4 Buttons are randomly generated from the Case Study Class and it also returns the response when the button is clicked. The user can also diagnose the disease/ailment and will recieve a score increase of 100.  This implemsnts the Case study walkthrough use case.
+	6. Profile Activity
+		This activity displays the user's current score and user name and implements the Profile display usecase.
+All above use cases are partially implemented to some degree. 
+
+1.2 Planned Activities
+
+The following activities are planned for the next report period
+
+	1. Store more data in the database including: User data (only store current user in preferences store for quick login) and History.
+	2. Logout user
+	3. Display images on the case study walkthrough
+	4. Flesh out the screen shown when a case study has been completed
+	5. Show history on the profile page
+	6. Allow the user to dynamically specify and load case studies from the disk (at the moment it only loads ifit has been placed into the database programatically - users currently can't specify a location)
+	

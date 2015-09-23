@@ -1,0 +1,33 @@
+{
+	"CS1":{
+		"metadata":{
+			"name": "CS1", "description": "Help this man"
+		},
+		"casestudy":{
+			"start": "an old man enters, what do you do?",
+			"questions":[
+				{
+					"type": "text",
+					"question": "How old are you?",
+					"answer": "What a rude question! Back in my day people just disnt ask such things”
+				},
+				{
+					"type": "img",
+					"question": "can I X-ray you?",
+					"answer": {
+						"desc": "Hi I am Nicole from Radiology, here is the old man's X-rays"
+						"img": ["img/xray1.png", "img/xray2.png"]
+					},
+					"quiz": "What is wrong with the old man's xrays?",
+					"quiz_answer": "He is dying from acute case of oldness",
+					"quiz_possible": ["he is fresh as the dickens", "he is iron man"]
+				}
+			],
+			"diagnosis": {
+				"correct": "He is an old man and will die soon",
+				"possible": ["aids", "cancer", "bunyons"]
+			}
+		},
+		"tips": ["this is a tip"]
+	}
+}
