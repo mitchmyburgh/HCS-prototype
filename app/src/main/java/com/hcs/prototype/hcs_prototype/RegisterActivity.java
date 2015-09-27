@@ -132,7 +132,7 @@ public class RegisterActivity extends ActionBarActivity {
             mNameView.setError("Invalid Name");
             focusView = mNameView;
             cancel = true;
-        } else if (mTelView.getText().toString().matches("[0-9]+")){
+        } else if (mTelView.getText().toString().matches("\\\\d+")){
             mTelView.setError("Invalid Phone");
             focusView = mTelView;
             cancel = true;

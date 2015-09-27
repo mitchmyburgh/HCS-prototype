@@ -531,7 +531,7 @@ public class CaseStudyDatabase extends SQLiteOpenHelper {
         //return new LinkedList<History>();
         List<History> hl = new LinkedList<History>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT  * FROM " + HIST_TABLE_NAME;
+        String query = "SELECT  * FROM " + HIST_TABLE_NAME+" WHERE "+KEY_UN+" = '"+username+"'";
         Cursor cursor = db.rawQuery(query, null);
         History hist = null;
         if (cursor.moveToFirst()) {
